@@ -1,7 +1,7 @@
 {
-  "name": "fs-app-template",
+  "name": "dog-app",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Hopefully, a pet app!",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
