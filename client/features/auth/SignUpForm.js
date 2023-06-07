@@ -2,28 +2,22 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../app/store';
 
-/**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
-
-const AuthForm = ({ name, displayName, isSignUp }) => {
+const SignUpForm = () => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    const isAdmin = formName === 'adminsignup'
-    dispatch(authenticate({ username, password, method: formName, isAdmin }));
+    const email = evt.target.email.value;
+    const name = evt.target.name.value;
+    dispatch(authenticate({ username, password, email, name, method: 'signup' }));
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
             <small>Username</small>
@@ -37,18 +31,24 @@ const AuthForm = ({ name, displayName, isSignUp }) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <label htmlFor="email">
+            <small>Email</small>
+          </label>
+          <input name="email" type="email" />
         </div>
-        {error && <div> {error} </div>}
+        <div>
+          <label htmlFor="name">
+            <small>Name</small>
+          </label>
+          <input name="name" type="text" />
+        </div>
+        <div>
+          <button type="submit">Sign Up</button>
+        </div>
+        {error && <div>{error}</div>}
       </form>
     </div>
   );
 };
 
-export default AuthForm;
-{/* <div>
-<label htmlFor="email">
-  <small>Email</small>
-</label>
-<input name = 'email' type = 'email' />
-</div> */}
+export default SignUpForm;
