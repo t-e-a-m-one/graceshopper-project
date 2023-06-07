@@ -9,61 +9,61 @@ const Dog = require('../server/db/models/Dog')
  */
 
 const dogs = [{
-  "id": 1,
+  // "id": 1,
   "name": "Gregorius",
   "sponsorFee": 89,
   "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 2,
+  // "id": 2,
   "name": "Jacobo",
   "sponsorFee": 38,
   "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 3,
+  // "id": 3,
   "name": "Selie",
   "sponsorFee": 73,
   "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 4,
+  // "id": 4,
   "name": "Glynis",
   "sponsorFee": 63,
   "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 5,
+  // "id": 5,
   "name": "Millard",
   "sponsorFee": 29,
   "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 6,
+  // "id": 6,
   "name": "Dyann",
   "sponsorFee": 73,
   "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 7,
+  // "id": 7,
   "name": "Tobiah",
   "sponsorFee": 62,
   "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 8,
+  // "id": 8,
   "name": "Normy",
   "sponsorFee": 41,
   "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 9,
+  // "id": 9,
   "name": "Linn",
   "sponsorFee": 28,
   "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
-  "id": 10,
+  // "id": 10,
   "name": "Dionysus",
   "sponsorFee": 4,
   "gender": "Male",

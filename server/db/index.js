@@ -8,11 +8,9 @@ const Dog = require("./models/Dog")
 //associations could go here!
 
 //Added this line below
-// User.belongsTo(Dog, { foreignKey: 'id', as: 'dog' });
-// Dog.hasMany(User, { foreignKey: 'id', as: 'users' });
 
 User.belongsTo(Dog, { foreignKey: 'dogId', as: 'dog' });
-Dog.hasMany(User, { foreignKey: 'dogId', as: 'users' });
+Dog.hasMany(User);
 
 module.exports = {
   db,
