@@ -21,7 +21,9 @@ const Dog = db.define('dog', {
     type: Sequelize.STRING
   },
   imageURL: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue:'https://picsum.photos/200/300'
+
   }
 });
 
