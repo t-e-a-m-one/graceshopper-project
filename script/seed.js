@@ -11,62 +11,62 @@ const Dog = require('../server/db/models/Dog')
 const dogs = [{
   "id": 1,
   "name": "Gregorius",
-  "gender": "Male",
   "sponsorFee": 89,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 2,
   "name": "Jacobo",
-  "gender": "Male",
   "sponsorFee": 38,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 3,
   "name": "Selie",
-  "gender": "Female",
   "sponsorFee": 73,
+  "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 4,
   "name": "Glynis",
-  "gender": "Female",
   "sponsorFee": 63,
+  "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 5,
   "name": "Millard",
-  "gender": "Male",
   "sponsorFee": 29,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 6,
   "name": "Dyann",
-  "gender": "Female",
   "sponsorFee": 73,
+  "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 7,
   "name": "Tobiah",
-  "gender": "Male",
   "sponsorFee": 62,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 8,
   "name": "Normy",
-  "gender": "Male",
   "sponsorFee": 41,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 9,
   "name": "Linn",
-  "gender": "Female",
   "sponsorFee": 28,
+  "gender": "Female",
   "imageURL": "https://picsum.photos/200/300"
 }, {
   "id": 10,
   "name": "Dionysus",
-  "gender": "Male",
   "sponsorFee": 4,
+  "gender": "Male",
   "imageURL": "https://picsum.photos/200/300"
 }]
 
@@ -84,6 +84,8 @@ async function seed() {
       await Dog.create({ id, name, sponsorFee, gender, imageURL });
     })
   );
+
+  console.log("dogs", dogs);
 
   // Creating Users
   const users = await Promise.all([
