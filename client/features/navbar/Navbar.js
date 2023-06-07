@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
+import "./Navbar.css";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -21,7 +22,9 @@ const Navbar = () => {
           <>
             <div className="header">
               <h1 className="title">Fetch</h1>
-              <h3 className="user">Welcome, {username}!</h3>
+              <h3 className="user" id="title1">
+                Welcome, {username}!
+              </h3>
             </div>
             <div className="nav-bar">
               <div className="nav-bar-left">
@@ -45,7 +48,7 @@ const Navbar = () => {
         ) : (
           <>
             <div className="header">
-              <h1 className="title">GraceShopper</h1>
+              <h1 className="title">Fetch</h1>
             </div>
 
             <div className="nav-bar">
