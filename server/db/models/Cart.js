@@ -1,5 +1,5 @@
-const {Sequelize} = require('sequelize')
-const {db} = require('../db')
+const {Sequelize}  = require('sequelize')
+const db = require ('../db')
 
 const Cart = db.define('Cart', {
   userId: {
@@ -23,7 +23,7 @@ const Cart = db.define('Cart', {
 Cart.beforeSave(async (cart) => {
   const dog = await cart.getDog();
   if (dog) {
-    cart.totalCost = dog.sponsorFee * cart.quantity; 
+    cart.totalCost = dog.sponsorFee * cart.quantity;
   }
 })
 
