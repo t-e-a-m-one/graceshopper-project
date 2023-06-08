@@ -46,9 +46,4 @@ const AuthForm = ({ name, displayName, isSignUp }) => {
 };
 
 export default AuthForm;
-{/* <div>
-<label htmlFor="email">
-  <small>Email</small>
-</label>
-<input name = 'email' type = 'email' />
-</div> */}
+

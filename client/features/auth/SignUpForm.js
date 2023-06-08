@@ -8,11 +8,15 @@ const SignUpForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const username = evt.target.username.value;
-    const password = evt.target.password.value;
-    const email = evt.target.email.value;
-    const name = evt.target.name.value;
-    dispatch(authenticate({ username, password, email, name, method: 'signup' }));
+    const formData = new FormData(evt.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+    const email = formData.get("email");
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const address = formData.get("address");
+    console.log(formData);
+    dispatch(authenticate({ username, password, email, firstName, lastName, address, method: 'signup' }));
   };
 
   return (
@@ -37,10 +41,22 @@ const SignUpForm = () => {
           <input name="email" type="email" />
         </div>
         <div>
-          <label htmlFor="name">
-            <small>Name</small>
+          <label htmlFor="firstName">
+            <small>First Name</small>
           </label>
-          <input name="name" type="text" />
+          <input name="firstName" type="text" />
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            <small>Last Name</small>
+          </label>
+          <input name="lastName" type="text" />
+        </div>
+        <div>
+          <label htmlFor="address">
+            <small>Address</small>
+          </label>
+          <input name="address" type="text" />
         </div>
         <div>
           <button type="submit">Sign Up</button>
@@ -50,5 +66,6 @@ const SignUpForm = () => {
     </div>
   );
 };
+
 
 export default SignUpForm;
