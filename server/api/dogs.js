@@ -27,7 +27,6 @@ router.get("/", async(req,res,next) => {
     // }
 
     const dog = await Dog.findByPk(req.params.id, {
-      // include: {model: User, as:"users"},
     });
     if(!dog) {
       return res.status(404).json({error:"Dog not found"});

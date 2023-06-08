@@ -8,6 +8,9 @@ import AllDogs from '../features/allDogs/AllDogs';
 import SingleDog from '../features/singleDog/SingleDog';
 import SignUpForm from '../features/auth/SignUpForm';
 
+/**
+ * COMPONENT
+ */
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -19,29 +22,40 @@ const AppRoutes = () => {
 
   return (
     <div>
-      <Routes>
-        {isLoggedIn ? (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<AuthForm name="login" displayName="Login" />} />
-            <Route path="/" element={<AuthForm name="Sign Up" displayName="Sign Up" />} />
-            {/* <Route path="/login" element={<AuthForm name="login" displayName="Login" />} /> */}
-          </> // I took this out because we already have "/" that leads to login, feels unnecessay - Fanfan
-        )}
+      {isLoggedIn ? (
+        <Routes>
+          <Route path="/*" element={<Home />} />
+          <Route to="/home" element={<Home />} />
+           <Route
+        path="/dogs"
+        element={<AllDogs />}
+        />
+         <Route
+        path="/dogs/:id"
+        element={<SingleDog />}
+        />
 
-        {/* Added routes for AllDogs and SingleDog */}
-        <Route path="/dogs" element={<AllDogs />} />
-        <Route path="/dogs/:id" element={<SingleDog />} />
-      </Routes>
-      {/* {!isLoggedIn && (
-        <AuthForm name="signup" displayName="Sign Up" />
-      )} */}
+        </Routes>
+      ) : (
+        <Routes>
+          <Route
+            path="/*"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
+          <Route
+            path="/login"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
+          <Route
+            path="/signup"
+            element={<AuthForm name="signup" displayName="Sign Up" />}
+          />
+
+        </Routes>
+      )}
     </div>
   );
+
 };
 
 export default AppRoutes;

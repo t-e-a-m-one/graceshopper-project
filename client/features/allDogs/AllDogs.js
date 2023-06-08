@@ -23,6 +23,8 @@ useEffect(() =>{
  if(!dogs || dogs.length === 0) {
   return <div>Loading...</div>
  }
+ console.log("imageUrl2:", dogs)
+
  return (
   <div>
     <h1>All Dogs</h1>
