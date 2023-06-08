@@ -85,12 +85,13 @@ async function seed() {
     })
   );
 
-  console.log("dogs", dogs);
+  // console.log("dogs", dogs);
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({ username: 'cody', password: '123', lastName: 'cool', firstName: 'cody', address: '123 123 street', email: 'cody@cod.com' }),
+    User.create({ username: 'murphy', password: '123', lastName: 'cool2', firstName: 'murphy', address: '2222 2222 ave', email: 'murphy@murph.com' }),
+    User.create({username: 'admin', password: 'admin', isAdmin: true, lastName: 'aaaa', firstName: 'bbbb', address: 'admin street', email: 'admin@admin.admin'})
   ])
 
 
@@ -99,7 +100,8 @@ async function seed() {
   return {
     users: {
       cody: users[0],
-      murphy: users[1]
+      murphy: users[1],
+      admin: users[2]
     }
   }
 }

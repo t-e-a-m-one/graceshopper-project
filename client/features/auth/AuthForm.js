@@ -8,7 +8,7 @@ import { authenticate } from '../../app/store';
   Props for Sign up: name="signup", displayName="Sign Up"
 **/
 
-const AuthForm = ({ name, displayName }) => {
+const AuthForm = ({ name, displayName, isSignUp }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -17,7 +17,8 @@ const AuthForm = ({ name, displayName }) => {
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: formName }));
+    const isAdmin = formName === 'adminsignup'
+    dispatch(authenticate({ username, password, method: formName, isAdmin }));
   };
 
   return (
@@ -45,3 +46,4 @@ const AuthForm = ({ name, displayName }) => {
 };
 
 export default AuthForm;
+
