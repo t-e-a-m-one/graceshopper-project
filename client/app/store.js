@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import authReducer from '../features/auth/authSlice';
-import dogsReducer from '../features/allDogs/allDogsSlice'
-import singleDogReducer from '../features/singleDog/singleDogSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import authReducer from "../features/auth/authSlice";
+import dogsReducer from "../features/allDogs/allDogsSlice";
+import singleDogReducer from "../features/singleDog/singleDogSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,5 +14,6 @@ const store = configureStore({
 });
 
 export default store;
-export * from '../features/auth/authSlice';
-export * from '../features/allDogs/allDogsSlice';
+export * from "../features/auth/authSlice";
+export * from "../features/allDogs/allDogsSlice";
+export * from "../features/cart/cartSlice";
