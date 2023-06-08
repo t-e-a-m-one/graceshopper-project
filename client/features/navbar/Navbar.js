@@ -2,57 +2,75 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-// import "./Navbar.css";
+import "./Navbar.css";
+
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const myId = useSelector((state) => state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate("/login");
   };
+  const username = useSelector((state) => state.auth.me.username);
+
   return (
     <div>
-      <h1>Fetch</h1>
       <nav>
         {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <button type="button" onClick={logoutAndRedirectHome}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
+          <>
             <div className="header">
-              <img
-                className="header__logo"
-                src="https://picsum.photos/200/40"
-                alt="Fetch Logo"
-              />
-              <div className="header__search">
-                <input className="header__searchInput" type="text" />
+              <h1 className="title">Fetch</h1>
+              <h3 className="user" id="title1">
+                Welcome, {username}!
+              </h3>
+            </div>
+            <div className="nav-bar">
+              <div className="nav-bar-left">
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+                <Link to={`/users/${myId}`}>Account</Link>
+                <Link to={`/users/${myId}/cartitems`}>Cart</Link>
               </div>
-              <div className="header__nav">
-                <div className="header__option">
-                  <span className="header__optionLineOne">Log In</span>
-                </div>
-                <div className="header__option">
-                  <span className="header__optionLineOne">Register </span>
-                </div>
-                <div className="header__optionBasket">
-                  <span className="header__optionLineTwo header__basketCount"></span>
-                </div>
-                <div className="header__favorites"></div>
+              <div className="nav-bar-right">
+                <Link to={`/users/`}>All Users</Link>
+                <button
+                  className="logout"
+                  type="button"
+                  onClick={logoutAndRedirectHome}
+                >
+                  Logout
+                </button>
               </div>
             </div>
-          </div>
+          </>
+        ) : (
+          <>
+            <div className="header">
+              <h1 className="title">Fetch</h1>
+            </div>
+
+            <div className="nav-bar">
+              <div className="nav-bar-left">
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+                {/* <Link to={`/users/${myId}`}>Account</Link> */}
+                <Link to={`/users/cartitems`}>Cart</Link>
+              </div>
+              <div className="nav-bar-right">
+                {/* <Link to={`/users/`}>All Users</Link> */}
+
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+              </div>
+            </div>
+          </>
         )}
       </nav>
       <hr />
     </div>
   );
 };
+
 export default Navbar;
