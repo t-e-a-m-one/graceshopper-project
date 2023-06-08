@@ -31,9 +31,9 @@ const SingleDog = () => {
   if (!dog) {
     return <div>Loading...</div>;
   }
-
+  console.log("imageUrl1:", dog.imageUrl)
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 545 }}>
     {dog.imageUrl && (
       <CardMedia sx={{ height: 140 }} image={dog.imageUrl} title={dog.name} />
     )}
@@ -47,9 +47,9 @@ const SingleDog = () => {
       <Typography variant="body2" color="text.secondary">
         Gender: {dog.gender}
       </Typography>
-      <Typography variant="body2" color="text.secondary">
+      {/* <Typography variant="body2" color="text.secondary">
         Dogs:
-      </Typography>
+      </Typography> */}
       {dog && dog.users && dog.users.length > 0 ? (
         <ul>
           {dog.users.map((user) => (
@@ -68,6 +68,9 @@ const SingleDog = () => {
     </CardActions>
     <Link to="/dogs">Back to Dogs</Link>
   </Card>
+
+
+
     // <Card sx={{ maxWidth: 345 }}>
     //   <CardMedia
     //     sx={{ height: 140 }}

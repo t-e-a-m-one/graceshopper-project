@@ -20,10 +20,9 @@ const Dog = db.define('dog', {
   gender: {
     type: Sequelize.STRING
   },
-  imageURL: {
+  imageUrl: {
     type: Sequelize.STRING,
     defaultValue:'https://picsum.photos/200/300'
-
   }
 });
 
