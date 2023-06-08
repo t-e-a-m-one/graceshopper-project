@@ -1,3 +1,4 @@
+//fanny routes
 const express = require("express");
 const router = express.Router();
 const { Cart } = require("../db");
@@ -13,7 +14,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// add item to cart
+// add item to cart //needs cart/add :(
 router.post("/:userId", async (req, res, next) => {
   try {
     const { userId } = req.params;

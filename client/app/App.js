@@ -4,7 +4,7 @@ import AppRoutes from "./AppRoutes";
 import AllDogs from "../features/allDogs/AllDogs";
 import SingleDog from "../features/singleDog/SingleDog";
 import SignUpForm from "../features/auth/SignUpForm";
-import Cart from "../features/cart/Cart"; // Import the Cart component
+// import CartPage from "../features/cart/cartPage"; // Import the CartPage component
 import Checkout from "../features/checkout/Checkout";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
       <SignUpForm />
       <AllDogs />
       <SingleDog />
-      <Cart /> {/* Add the Cart component here */}
+      {/* <CartPage /> */}
     </div>
   );
 };
