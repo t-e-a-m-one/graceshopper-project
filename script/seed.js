@@ -74,7 +74,7 @@ const Dog = require('../server/db/models/Dog')
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
-
+}
   // await Promise.all(dogs.map(dog) => {
   //   return Dog.create(dog)
   // })
@@ -86,63 +86,90 @@ async function seed() {
   // );
 
   // Creating Users
+//   const users = await Promise.all([
+//     User.create({ username: 'cody', password: '123', lastName: 'cool', firstName: 'cody', address: '123 123 street', email: 'cody@cod.com' }),
+//     User.create({ username: 'murphy', password: '123', lastName: 'cool2', firstName: 'murphy', address: '2222 2222 ave', email: 'murphy@murph.com' }),
+//     User.create({username: 'admin', password: 'admin', isAdmin: true, lastName: 'aaaa', firstName: 'bbbb', address: 'admin street', email: 'admin@admin.admin'})
+//   ])
+
+async function seed() {
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
+
+  // await Promise.all(dogs.map(dog) => {
+  //   return Dog.create(dog)
+  // })
+  // await Promise.all(
+  //   dogs.map(async (dogData) => {
+  //     const { id, name, sponsorFee, gender, imageURL } = dogData;
+  //     await Dog.create({ id, name, sponsorFee, gender, imageURL });
+  //   })
+  // );
+
+  // console.log("dogs", dogs);
+
+  // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({ username: 'cody', password: '123', lastName: 'cool', firstName: 'cody', address: '123 123 street', email: 'cody@cod.com' }),
+    User.create({ username: 'murphy', password: '123', lastName: 'cool2', firstName: 'murphy', address: '2222 2222 ave', email: 'murphy@murph.com' }),
+    User.create({username: 'admin', password: 'admin', isAdmin: true, lastName: 'aaaa', firstName: 'bbbb', address: 'admin street', email: 'admin@admin.admin'})
   ])
 //Creating Dogs aka Products
 const dogs =  await Promise.all([
-Dog.create({
-  "name": "Gregorius",
-  "sponsorFee": 89,
-  "gender": "Male"
-}),
   Dog.create({
-  "name": "Jacobo",
-  "sponsorFee": 38,
-  "gender": "Male"
-}),
-  Dog.create({
-  "name": "Selie",
-  "sponsorFee": 73,
-  "gender": "Female"
-}),
-  Dog.create({
-  "name": "Glynis",
-  "sponsorFee": 63,
-  "gender": "Female"
-}),
-  Dog.create({
-  "name": "Millard",
-  "sponsorFee": 29,
-  "gender": "Male"
-}),
-  Dog.create({
-  "name": "Dyann",
-  "sponsorFee": 73,
-  "gender": "Female"
-}),
-  Dog.create({
-  "name": "Tobiah",
-  "sponsorFee": 62,
-  "gender": "Male"
-}),
-  Dog.create({
-  "name": "Normy",
-  "sponsorFee": 41,
-  "gender": "Male"
-}),
-  Dog.create({
-  "name": "Linn",
-  "sponsorFee": 28,
-  "gender": "Female"
-}),
-  Dog.create({
-  "name": "Dionysus",
-  "sponsorFee": 4,
-  "gender": "Male"
-}),
-]);
+    "name": "Gregorius",
+    "sponsorFee": 89,
+    "gender": "Male"
+  }),
+    Dog.create({
+    "name": "Jacobo",
+    "sponsorFee": 38,
+    "gender": "Male"
+  }),
+    Dog.create({
+    "name": "Selie",
+    "sponsorFee": 73,
+    "gender": "Female"
+  }),
+    Dog.create({
+    "name": "Glynis",
+    "sponsorFee": 63,
+    "gender": "Female"
+  }),
+    Dog.create({
+    "name": "Millard",
+    "sponsorFee": 29,
+    "gender": "Male"
+  }),
+    Dog.create({
+    "name": "Dyann",
+    "sponsorFee": 73,
+    "gender": "Female"
+  }),
+    Dog.create({
+    "name": "Tobiah",
+    "sponsorFee": 62,
+    "gender": "Male"
+  }),
+    Dog.create({
+    "name": "Normy",
+    "sponsorFee": 41,
+    "gender": "Male"
+  }),
+    Dog.create({
+    "name": "Linn",
+    "sponsorFee": 28,
+    "gender": "Female"
+  }),
+    Dog.create({
+    "name": "Dionysus",
+    "sponsorFee": 4,
+    "gender": "Male",
+    "imageURL": "https://picsum.photos/200/300"
+    })
+  ])
+
+
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${dogs.length} dogs`)
@@ -150,7 +177,8 @@ Dog.create({
   return {
     users: {
       cody: users[0],
-      murphy: users[1]
+      murphy: users[1],
+      admin: users[2]
     }
   }
 }
@@ -184,4 +212,4 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;

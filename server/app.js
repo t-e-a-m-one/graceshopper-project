@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const app = express()
 
 
-// logging middleware
+// logging
 app.use(morgan('dev'))
 
 // body parsing middleware

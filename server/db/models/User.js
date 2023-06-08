@@ -11,8 +11,32 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
   password: {
     type: Sequelize.STRING,
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
@@ -51,7 +75,7 @@ User.findByToken = async function(token) {
       throw 'nooo'
     }
     return user
-  } catch (ex) {
+  } catch (err) {
     const error = Error('bad token')
     error.status = 401
     throw error

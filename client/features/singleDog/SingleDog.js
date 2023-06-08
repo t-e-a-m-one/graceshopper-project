@@ -31,7 +31,7 @@ const SingleDog = () => {
   if (!dog) {
     return <div>Loading...</div>;
   }
-  console.log("imageUrl1:", dog.imageUrl)
+  console.log("imageUrl1:", dog)
   return (
     <Card sx={{ maxWidth: 545 }}>
     {dog.imageUrl && (
