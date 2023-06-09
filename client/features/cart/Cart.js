@@ -1,78 +1,136 @@
-import React, { useEffect } from "react";
-import { fetchCartItems, removeCartItemAsync } from "./cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  fetchCartAsync,
+  addCartItemAsync,
+  updateCartItemQuantityAsync,
+  removeCartItemAsync,
+} from "./cartSlice";
+import {
+  updateOrderItemQuantityAsync,
+  removeOrderItemAsync,
+} from "./orderItemSlice";
 
-function Cart() {
-  const { id } = useParams();
+const Cart = () => {
   const dispatch = useDispatch();
-
-  const theCart = useSelector((state) => state.cart);
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const user = useSelector((state) => state.auth.me);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCartItems(id));
-  }, [dispatch, id]);
-
-  const handleRemoveFromCart = (dogId) => {
-    if (isLoggedIn) {
-      dispatch(removeCartItemAsync({ dogId, userId: id }));
+    if (user.id) {
+      dispatch(fetchCartAsync(user.id));
     }
+  }, [dispatch, user]);
+
+  const cart = useSelector((state) => state.cart.data);
+  const orderItem = useSelector((state) => state.orderItem.data);
+
+  const [qty, setQty] = useState(1);
+
+  const handleUpdateQuantity = (orderItemId, prodPrice) => {
+    const reqBody = { qty, prodPrice };
+    dispatch(
+      updateOrderItemQuantityAsync({
+        userId: user.id,
+        cartItemId: orderItemId,
+        quantity: qty,
+      })
+    );
+  };
+
+  const handleDelete = (orderItemId) => {
+    dispatch(
+      removeOrderItemAsync({ userId: user.id, cartItemId: orderItemId })
+    );
   };
 
   return (
-    <>
-      <ol>
-        {isLoggedIn && theCart && theCart.length > 0 && theCart[0].products ? (
-          theCart[0].products.map((singleItem, index) => {
-            return (
-              <ul key={index}>
-                <div className="cart-item-container">
-                  <li className="list-item">Name: {singleItem.name}</li>
-                  <li className="list-item">Price: {singleItem.price}</li>
-                  <li className="list-item">
-                    Quantity Desired: {singleItem.cartItems.quantity}
-                  </li>
-                  <li className="list-item">
-                    Price: {singleItem.cartItems.quantity * singleItem.price}
-                  </li>
-                  <button onClick={() => handleRemoveFromCart(singleItem.id)}>
-                    Remove from Cart
-                  </button>
+    <section>
+      <div>
+        <div>
+          <h5>Cart items</h5>
+        </div>
+        <div>
+          {orderItem && orderItem.name === "Error" && (
+            <p>{orderItem.message}</p>
+          )}
+          {cart && cart.orderItems && cart.orderItems.length > 0 ? (
+            <div>
+              <p>Total items: {cart.totalCartItems}</p>
+              <p>Pre-Tax Order Total: ${cart.totalCost}</p>
+              {cart.orderItems.map((orderItem) => (
+                <div key={orderItem.id}>
+                  <div>
+                    <img
+                      src={orderItem.product.prodImg}
+                      alt={orderItem.product.prodName}
+                    />
+                  </div>
+                  <div>
+                    <p>
+                      <Link to={`/allProducts/${orderItem.product.id}`}>
+                        <strong>{orderItem.product.prodName}</strong>
+                      </Link>
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(orderItem.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      name="quantity"
+                      onChange={(event) => setQty(event.target.value)}
+                    />
+                    {qty >= 0 &&
+                      (qty === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(orderItem.id)}
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleUpdateQuantity(
+                              orderItem.id,
+                              orderItem.product.prodPrice
+                            )
+                          }
+                        >
+                          Update
+                        </button>
+                      ))}
+                    <p>${orderItem.product.prodPrice}</p>
+                  </div>
+                  <p>ProdQty: {orderItem.quantity}</p>
+                  <p>
+                    ProdTotal: <strong>${orderItem.total}</strong>
+                  </p>
                 </div>
-                <br />
-              </ul>
-            );
-          })
-        ) : (
-          <ul>
-            {theCart && theCart.length > 0
-              ? theCart.map((item, idx) => (
-                  <ul key={idx}>
-                    <div className="cart-item-container">
-                      <li className="list-item">Name: {item.name}</li>
-                      <li className="list-item">Price: {item.price}</li>
-                      <li className="list-item">
-                        Count: {item.cartItems.quantity}
-                      </li>
-                      <li className="list-item">
-                        Total: {item.cartItems.quantity * item.price}
-                      </li>
-                      <button onClick={() => handleRemoveFromCart(item.id)}>
-                        Remove from Cart
-                      </button>
-                    </div>
-                  </ul>
-                ))
-              : null}
-          </ul>
-        )}
-      </ol>
-      <button onClick={() => alert("You need to be logged in.")}>
-        Checkout
-      </button>
-    </>
+              ))}
+            </div>
+          ) : (
+            <div>There are no items in the cart</div>
+          )}
+          <button type="button" onClick={() => navigate("/allProducts")}>
+            Back to Home
+          </button>
+          {cart && cart.orderItems && cart.orderItems.length > 0 && (
+            <button type="button" onClick={() => navigate("/checkout")}>
+              Checkout
+            </button>
+          )}
+        </div>
+      </div>
+    </section>
   );
-}
+};
 
 export default Cart;

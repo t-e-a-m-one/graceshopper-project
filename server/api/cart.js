@@ -1,4 +1,3 @@
-//fanny routes
 const express = require("express");
 const router = express.Router();
 const { Cart } = require("../db");
@@ -10,12 +9,12 @@ router.get("/:userId", async (req, res, next) => {
     const cart = await Cart.findAll({ where: { userId } });
     res.json(cart);
   } catch (error) {
-    next(console.log("error conjuring cart!", error));
+    next(error);
   }
 });
 
-// add item to cart //needs cart/add :(
-router.post("/:userId", async (req, res, next) => {
+// add item to cart
+router.post("/add/:userId", async (req, res, next) => {
   try {
     const { userId } = req.params;
     const { dogId, quantity } = req.body;
@@ -23,7 +22,7 @@ router.post("/:userId", async (req, res, next) => {
     const cartItem = await Cart.create({ userId, dogId, quantity });
     res.json(cartItem);
   } catch (error) {
-    next(console.log("error ADDING to cart!", error));
+    next(error);
   }
 });
 

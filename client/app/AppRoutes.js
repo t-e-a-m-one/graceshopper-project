@@ -8,10 +8,6 @@ import AllDogs from "../features/allDogs/AllDogs";
 import SingleDog from "../features/singleDog/SingleDog";
 import Cart from "../features/cart/Cart";
 
-/**
- * COMPONENT
- */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
@@ -28,7 +24,7 @@ const AppRoutes = () => {
           <Route to="/home" element={<Home />} />
           <Route path="/dogs" element={<AllDogs />} />
           <Route path="/dogs/:id" element={<SingleDog />} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart" element={<Cart />} /> //could this be it
         </Routes>
       ) : (
         <Routes>

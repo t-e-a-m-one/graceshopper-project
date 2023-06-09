@@ -21,7 +21,7 @@ const SingleDog = () => {
   }, [dispatch, id]);
 
   const handleAddToCart = () => {
-    dispatch(addCartItemAsync({ dogId: dog.id, userId: userId }));
+    dispatch(addCartItemAsync({ userId: userId, dogId: dog.id }));
   };
 
   if (!dog) {
