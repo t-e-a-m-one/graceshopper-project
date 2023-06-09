@@ -1,193 +1,74 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User } } = require('../server/db')
 const Dog = require('../server/db/models/Dog')
+const faker = require('faker')
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
 
-// const dogs = [{
-//   // "id": 1,
-//   "name": "Gregorius",
-//   "sponsorFee": 89,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 2,
-//   "name": "Jacobo",
-//   "sponsorFee": 38,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 3,
-//   "name": "Selie",
-//   "sponsorFee": 73,
-//   "gender": "Female",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 4,
-//   "name": "Glynis",
-//   "sponsorFee": 63,
-//   "gender": "Female",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 5,
-//   "name": "Millard",
-//   "sponsorFee": 29,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 6,
-//   "name": "Dyann",
-//   "sponsorFee": 73,
-//   "gender": "Female",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 7,
-//   "name": "Tobiah",
-//   "sponsorFee": 62,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 8,
-//   "name": "Normy",
-//   "sponsorFee": 41,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 9,
-//   "name": "Linn",
-//   "sponsorFee": 28,
-//   "gender": "Female",
-//   "imageURL": "https://picsum.photos/200/300"
-// }, {
-//   // "id": 10,
-//   "name": "Dionysus",
-//   "sponsorFee": 4,
-//   "gender": "Male",
-//   "imageURL": "https://picsum.photos/200/300"
-// }]
-
-
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
-}
-  // await Promise.all(dogs.map(dog) => {
-  //   return Dog.create(dog)
-  // })
-  // await Promise.all(
-  //   dogs.map(async (dogData) => {
-  //     const { id, name, sponsorFee, gender, imageURL } = dogData;
-  //     await Dog.create({ id, name, sponsorFee, gender, imageURL });
-  //   })
-  // );
-
-  // Creating Users
-//   const users = await Promise.all([
-//     User.create({ username: 'cody', password: '123', lastName: 'cool', firstName: 'cody', address: '123 123 street', email: 'cody@cod.com' }),
-//     User.create({ username: 'murphy', password: '123', lastName: 'cool2', firstName: 'murphy', address: '2222 2222 ave', email: 'murphy@murph.com' }),
-//     User.create({username: 'admin', password: 'admin', isAdmin: true, lastName: 'aaaa', firstName: 'bbbb', address: 'admin street', email: 'admin@admin.admin'})
-//   ])
-
-async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
-
-  // await Promise.all(dogs.map(dog) => {
-  //   return Dog.create(dog)
-  // })
-  // await Promise.all(
-  //   dogs.map(async (dogData) => {
-  //     const { id, name, sponsorFee, gender, imageURL } = dogData;
-  //     await Dog.create({ id, name, sponsorFee, gender, imageURL });
-  //   })
-  // );
-
-  // console.log("dogs", dogs);
-
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123', lastName: 'cool', firstName: 'cody', address: '123 123 street', email: 'cody@cod.com' }),
-    User.create({ username: 'murphy', password: '123', lastName: 'cool2', firstName: 'murphy', address: '2222 2222 ave', email: 'murphy@murph.com' }),
-    User.create({username: 'admin', password: 'admin', isAdmin: true, lastName: 'aaaa', firstName: 'bbbb', address: 'admin street', email: 'admin@admin.admin'})
-  ])
-//Creating Dogs aka Products
-const dogs =  await Promise.all([
-  Dog.create({
-    "name": "Gregorius",
-    "sponsorFee": 89,
-    "gender": "Male"
-  }),
-    Dog.create({
-    "name": "Jacobo",
-    "sponsorFee": 38,
-    "gender": "Male"
-  }),
-    Dog.create({
-    "name": "Selie",
-    "sponsorFee": 73,
-    "gender": "Female"
-  }),
-    Dog.create({
-    "name": "Glynis",
-    "sponsorFee": 63,
-    "gender": "Female"
-  }),
-    Dog.create({
-    "name": "Millard",
-    "sponsorFee": 29,
-    "gender": "Male"
-  }),
-    Dog.create({
-    "name": "Dyann",
-    "sponsorFee": 73,
-    "gender": "Female"
-  }),
-    Dog.create({
-    "name": "Tobiah",
-    "sponsorFee": 62,
-    "gender": "Male"
-  }),
-    Dog.create({
-    "name": "Normy",
-    "sponsorFee": 41,
-    "gender": "Male"
-  }),
-    Dog.create({
-    "name": "Linn",
-    "sponsorFee": 28,
-    "gender": "Female"
-  }),
-    Dog.create({
-    "name": "Dionysus",
-    "sponsorFee": 4,
-    "gender": "Male",
-    "imageURL": "https://picsum.photos/200/300"
-    })
-  ])
+  await db.sync({ force: true });
+  console.log('db synced!');
 
 
+  // Create dogs
+  const dogs = [];
+  for (let i = 0; i < 100; i++) {
+    // Generate dog data
+    const name = faker.name.firstName();
+    const sponsorFee = faker.random.number({ min: 10, max: 100 });
+    const gender = faker.random.arrayElement(['Male', 'Female']);
+    const imageURL = faker.image.imageUrl(); // Generate random image URL
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${dogs.length} dogs`)
-  console.log(`seeded successfully`)
+    const dog = await Dog.create({
+      name,
+      sponsorFee,
+      gender,
+      imageURL, // Add imageURL property
+    });
+
+    dogs.push(dog);
+  }
+
+    // Create users
+    const users = [];
+    for (let i = 0; i < 20; i++) {
+      // Generate user data
+      const username = faker.internet.userName();
+      const password = '123';
+      const lastName = faker.name.lastName();
+      const firstName = faker.name.firstName();
+      const address = faker.address.streetAddress();
+      const email = faker.internet.email();
+
+      const user = await User.create({
+        username,
+        password,
+        lastName,
+        firstName,
+        address,
+        email,
+      });
+
+      users.push(user);
+    }
+
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${dogs.length} dogs`);
+  console.log(`seeded successfully`);
+
   return {
     users: {
       cody: users[0],
       murphy: users[1],
-      admin: users[2]
-    }
-  }
+      admin: users[2],
+    },
+  };
 }
 
-/*
- We've separated the `seed` function from the `runSeed` function.
- This way we can isolate the error handling and exit trapping.
- The `seed` function is concerned only with modifying the database.
-*/
 async function runSeed() {
   console.log('seeding...')
   try {
@@ -201,15 +82,7 @@ async function runSeed() {
     console.log('db connection closed')
   }
 }
-
-/*
-  Execute the `seed` function, IF we ran this module directly (`node seed`).
-  `Async` functions always return a promise, so we can use `catch` to handle
-  any errors that might occur inside of `seed`.
-*/
 if (module === require.main) {
-  runSeed()
+runSeed();
 }
-
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
