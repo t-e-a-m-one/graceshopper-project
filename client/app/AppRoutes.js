@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import { me } from './store';
-import AllDogs from '../features/allDogs/AllDogs';
-import SingleDog from '../features/singleDog/SingleDog';
-import SignUpForm from '../features/auth/SignUpForm';
+// Libraries
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+
+// Files
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/home/Home";
+import { me } from "./store";
+import Cart from "../features/cart/Cart";
+import AllProducts from "../features/allProducts/AllProducts";
+import SingleProduct from "../features/singleProduct/SingleProduct";
 
 /**
- * COMPONENT
+ * AppRoutes component.
  */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
@@ -26,15 +28,9 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
-           <Route
-        path="/dogs"
-        element={<AllDogs />}
-        />
-         <Route
-        path="/dogs/:id"
-        element={<SingleDog />}
-        />
-
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/allProducts/:prodId" element={<SingleProduct />} />
         </Routes>
       ) : (
         <Routes>
@@ -50,12 +46,12 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
-
+          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/allProducts/:prodId" element={<SingleProduct />} />
         </Routes>
       )}
     </div>
   );
-
 };
 
 export default AppRoutes;

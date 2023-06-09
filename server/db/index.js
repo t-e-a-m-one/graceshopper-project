@@ -1,21 +1,30 @@
-//this is the access point for all things database related!
-const { Sequelize, DataTypes } = require('sequelize')
-const db = require('./db')
+// This is the access point for all things database related!
 
-const User = require('./models/User')
-const Dog = require("./models/Dog")
+const db = require("./db");
 
-//associations could go here!
+const User = require("./models/User");
+const Product = require("./models/Product");
+const Cart = require("./models/Cart");
+const OrderItem = require("./models/OrderItem");
 
-//Added this line below
+// User-Cart: One-to-Many
+User.hasMany(Cart);
+Cart.belongsTo(User);
 
-User.belongsTo(Dog, { foreignKey: 'dogId', as: 'dog' });
-Dog.hasMany(User);
+// Cart-OrderItem: One-to-many
+Cart.hasMany(OrderItem);
+OrderItem.belongsTo(Cart);
+
+// Product-OrderItem: One-to-many
+Product.hasMany(OrderItem);
+OrderItem.belongsTo(Product);
 
 module.exports = {
   db,
-  Dog,
   models: {
     User,
+    Product,
+    Cart,
+    OrderItem,
   },
-}
+};

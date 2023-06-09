@@ -1,65 +1,100 @@
-'use strict'
+"use strict";
 
-const { db, models: { User } } = require('../server/db')
-const Dog = require('../server/db/models/Dog')
-const faker = require('faker')
-
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
+const {
+  db,
+  models: { User },
+} = require("../server/db");
+const Dog = require("../server/db/models/Dog");
 
 async function seed() {
-  await db.sync({ force: true });
-  console.log('db synced!');
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
-
-  // Create dogs
-  const dogs = [];
-  for (let i = 0; i < 100; i++) {
-    // Generate dog data
-    const name = faker.name.firstName();
-    const sponsorFee = faker.random.number({ min: 10, max: 100 });
-    const gender = faker.random.arrayElement(['Male', 'Female']);
-    const imageURL = faker.image.imageUrl(); // Generate random image URL
-
-    const dog = await Dog.create({
-      name,
-      sponsorFee,
-      gender,
-      imageURL, // Add imageURL property
-    });
-
-    dogs.push(dog);
-  }
-
-    // Create users
-    const users = [];
-    for (let i = 0; i < 20; i++) {
-      // Generate user data
-      const username = faker.internet.userName();
-      const password = '123';
-      const lastName = faker.name.lastName();
-      const firstName = faker.name.firstName();
-      const address = faker.address.streetAddress();
-      const email = faker.internet.email();
-
-      const user = await User.create({
-        username,
-        password,
-        lastName,
-        firstName,
-        address,
-        email,
-      });
-
-      users.push(user);
-    }
+  const users = await Promise.all([
+    User.create({
+      username: "cody",
+      password: "123",
+      lastName: "cool",
+      firstName: "cody",
+      address: "123 123 street",
+      email: "cody@cod.com",
+    }),
+    User.create({
+      username: "murphy",
+      password: "123",
+      lastName: "cool2",
+      firstName: "murphy",
+      address: "2222 2222 ave",
+      email: "murphy@murph.com",
+    }),
+    User.create({
+      username: "admin",
+      password: "admin",
+      isAdmin: true,
+      lastName: "aaaa",
+      firstName: "bbbb",
+      address: "admin street",
+      email: "admin@admin.admin",
+    }),
+  ]);
+  //Creating Dogs aka Products
+  const dogs = await Promise.all([
+    Dog.create({
+      name: "Gregorius",
+      sponsorFee: 89,
+      gender: "Male",
+    }),
+    Dog.create({
+      name: "Jacobo",
+      sponsorFee: 38,
+      gender: "Male",
+    }),
+    Dog.create({
+      name: "Selie",
+      sponsorFee: 73,
+      gender: "Female",
+    }),
+    Dog.create({
+      name: "Glynis",
+      sponsorFee: 63,
+      gender: "Female",
+    }),
+    Dog.create({
+      name: "Millard",
+      sponsorFee: 29,
+      gender: "Male",
+    }),
+    Dog.create({
+      name: "Dyann",
+      sponsorFee: 73,
+      gender: "Female",
+    }),
+    Dog.create({
+      name: "Tobiah",
+      sponsorFee: 62,
+      gender: "Male",
+    }),
+    Dog.create({
+      name: "Normy",
+      sponsorFee: 41,
+      gender: "Male",
+    }),
+    Dog.create({
+      name: "Linn",
+      sponsorFee: 28,
+      gender: "Female",
+    }),
+    Dog.create({
+      name: "Dionysus",
+      sponsorFee: 4,
+      gender: "Male",
+      imageURL: "https://picsum.photos/200/300",
+    }),
+  ]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${dogs.length} dogs`);
   console.log(`seeded successfully`);
-
   return {
     users: {
       cody: users[0],
@@ -70,19 +105,21 @@ async function seed() {
 }
 
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
+
 if (module === require.main) {
-runSeed();
+  runSeed();
 }
+
 module.exports = seed;

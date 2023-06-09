@@ -1,19 +1,63 @@
-const router = require('express').Router()
-const { models: { User }} = require('../db')
+const router = require("express").Router();
+const {
+  models: { User },
+  Address,
+} = require("../db");
 
+module.exports = router;
 
-router.get('/', async (req, res, next) => {
+// GET users at /api/users, include only their id, username, and email.
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'username']
-    })
-    res.json(users)
+      attributes: ["id", "username", "email"],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-module.exports = router
+// GET user at /api/users/:userId, include their associated address(es).
+router.get("/:userId", async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.userId, {
+      include: [Address],
+    });
+    res.send(singleUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:userId/address", async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findByPk(userId);
+    const addresses = await user.getAddresses();
+    res.json(addresses);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:userId", async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.userId);
+    await singleUser.update(req.body);
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// DELETE `/api/users/:userId` is a route to remove a user (based on its id).
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const userToDelete = await User.findByPk(req.params.userId);
+    await userToDelete.destroy();
+    res.send(userToDelete);
+  } catch (error) {
+    next(error);
+  }
+});
