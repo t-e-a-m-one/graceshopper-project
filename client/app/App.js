@@ -8,6 +8,8 @@ import AllDogs from '../features/allDogs/AllDogs'
 import SingleDog from '../features/singleDog/SingleDog'
 import SignUpForm from '../features/auth/SignUpForm'
 
+// .config();
+
 const App = () => {
   return (
     <div>

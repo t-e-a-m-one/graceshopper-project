@@ -6,7 +6,8 @@ import Home from '../features/home/Home';
 import { me } from './store';
 import AllDogs from '../features/allDogs/AllDogs';
 import SingleDog from '../features/singleDog/SingleDog';
-import SignUpForm from '../features/auth/SignUpForm';
+
+// dotenv.config();
 
 /**
  * COMPONENT
