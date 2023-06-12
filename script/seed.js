@@ -1,6 +1,6 @@
 'use strict'
 
-const { db, models: { User } } = require('../server/db')
+const { db, models: { User, Order } } = require('../server/db')
 const Dog = require('../server/db/models/Dog')
 const faker = require('faker')
 
@@ -19,7 +19,7 @@ async function seed() {
   for (let i = 0; i < 100; i++) {
     // Generate dog data
     const name = faker.name.firstName();
-    const sponsorFee = faker.random.number({ min: 10, max: 100 });
+    const sponsorFee = faker.datatype.number({ min: 10, max: 100 });
     const gender = faker.random.arrayElement(['Male', 'Female']);
     const imageURL = faker.image.imageUrl(); // Generate random image URL
 
@@ -55,9 +55,33 @@ async function seed() {
 
       users.push(user);
     }
+    // Create orders
+const orders = [];
+let newOrder; // Declare newOrder outside the loop
+for (let i = 0; i < 10; i++) {
+  newOrder = await Order.create({
+    isCart: true,
+    transactionID: 'xyz123',
+    cartItems: [{ item: 'item1', quantity: 2 }, { item: 'item2', quantity: 1 }],
+    checkout: false,
+  });
+  orders.push(newOrder);
+}
+
+// Update an order (example)
+if (orders.length > 0) {
+  const orderId = orders[0].id; // Use the ID of the first order
+  const orderToUpdate = await Order.findByPk(orderId);
+  if (orderToUpdate) {
+    orderToUpdate.checkout = true;
+    await orderToUpdate.save();
+  }
+}
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${dogs.length} dogs`);
+  console.log(`seeded ${orders.length} orders`);
   console.log(`seeded successfully`);
 
   return {

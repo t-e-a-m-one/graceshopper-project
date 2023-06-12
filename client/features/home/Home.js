@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 /**
  * COMPONENT
@@ -10,6 +11,7 @@ const Home = (props) => {
   return (
     <div>
       <h3>Welcome, {username}</h3>
+      <Link to={"/dogs"}>View Dogs</Link>
     </div>
   );
 };

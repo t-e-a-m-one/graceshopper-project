@@ -1,4 +1,4 @@
-const {Dog, User} = require("../db/index")
+const {Dog} = require("../db/index")
 const express = require('express');
 // const User = require("../db/models/User");
 const router = require("express").Router();
@@ -20,13 +20,15 @@ router.get("/", async(req,res,next) => {
 
  //This route serves up a single dog
  router.get("/:id", async (req,res,next) => {
-  try {
-    // const id = req.params.id;
-    // if (!id) {
-    //   return res.status(400).json({ error: "Invalid ID" });
-    // }
 
-    const dog = await Dog.findByPk(req.params.id, {
+  const id = req.params.id;
+  //This line below helped fix the id issues
+  if (!id || !id.length) {
+    return res.status(401).json({ error: "Invalid ID" });
+  }
+
+  try {
+    const dog = await Dog.findByPk(id, {
     });
     if(!dog) {
       return res.status(404).json({error:"Dog not found"});
