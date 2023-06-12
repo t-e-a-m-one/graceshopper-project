@@ -109,7 +109,7 @@ function Checkout() {
       >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Fetch - We make fetch happen.
+            Fetch!
           </Typography>
         </Toolbar>
       </AppBar>

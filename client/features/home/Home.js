@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 /**
@@ -10,7 +10,7 @@ const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h3>Welcome!</h3>
       <Link to={"/dogs"}>View Dogs</Link>
     </div>
   );
