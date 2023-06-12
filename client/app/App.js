@@ -7,6 +7,7 @@ import AppRoutes from './AppRoutes';
 import AllDogs from '../features/allDogs/AllDogs'
 import SingleDog from '../features/singleDog/SingleDog'
 import SignUpForm from '../features/auth/SignUpForm'
+import Checkout from '../features/checkout/Checkout'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar />
       <AppRoutes />
       <SignUpForm />
+      <Checkout />
       <AllDogs />
       <SingleDog />
     </div>
