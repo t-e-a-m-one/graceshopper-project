@@ -3,6 +3,8 @@ const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 
+const { DataTypes } = Sequelize;
+
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
@@ -37,7 +39,12 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  }
+  },
+  cartItems: {
+    type: DataTypes.ARRAY(DataTypes.JSONB),
+    defaultValue: [],
+    allowNull: true,
+  },
 })
 
 module.exports = User

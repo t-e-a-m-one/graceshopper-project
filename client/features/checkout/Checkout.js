@@ -21,20 +21,20 @@ import Cart from './Cart';
 function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
   const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: "Item 1",
-      price: 9.99,
-      amount: 2,
-      image: "item1.jpg",
-    },
-    {
-      id: 2,
-      title: "Item 2",
-      price: 14.99,
-      amount: 1,
-      image: "item2.jpg",
-    },
+    // {
+    //   id: 1,
+    //   title: "Item 1",
+    //   price: 9.99,
+    //   amount: 2,
+    //   image: "item1.jpg",
+    // },
+    // {
+    //   id: 2,
+    //   title: "Item 2",
+    //   price: 14.99,
+    //   amount: 1,
+    //   image: "item2.jpg",
+    // },
   ]);
 
   useEffect(() => {
@@ -49,13 +49,23 @@ function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
+
+
+  const handleRemoveFromCart = (itemId) => {
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter((item) => item.id !== itemId)
+    );
+  };
   const handleAddToCart = (item) => {
-    const existingItem = cartItems.find((cartItem) => cartItem.item === item.id);
+    const existingItem = cartItems.find(
+      (cartItem) =>
+        cartItem.id === item.id && cartItem.sponsorFee === item.sponsorFee
+    );
 
     if (existingItem) {
       setCartItems((prevCartItems) =>
         prevCartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.id === item.id && cartItem.sponsorFee === item.sponsorFee
             ? { ...cartItem, amount: cartItem.amount + item.amount }
             : cartItem
         )
@@ -64,17 +74,10 @@ function Checkout() {
       const newItem = {
         ...item,
         amount: 1,
-        sponsorFee: item.sponsorFee,
-        price: item.price, // Set the correct price value
+        price: item.price,
       };
       setCartItems((prevCartItems) => [...prevCartItems, newItem]);
     }
-  };
-
-  const handleRemoveFromCart = (itemId) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.filter((item) => item.id !== itemId)
-    );
   };
 
   const steps = ['Shipping address', 'Payment details', 'Review your order'];

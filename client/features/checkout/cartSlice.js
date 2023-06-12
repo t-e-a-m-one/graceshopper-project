@@ -18,14 +18,17 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
-      const existingItem = state.items.find((i) => i.id === item.id);
+      const existingItem = state.items.find(
+        (i) => i.id === item.id && i.sponsorFee === item.sponsorFee
+      );
+
       if (existingItem) {
         existingItem.amount += 1;
       } else {
         const newItem = {
           ...item,
           amount: 1,
-          price: item.price, // Set the correct price value
+          price: item.price,
         };
         state.items.push(newItem);
       }
@@ -61,6 +64,26 @@ export const selectCartItems = createSelector(
 );
 
 export default cartSlice.reducer;
+
+
+
+// addToCart: (state, action) => {
+//   const item = action.payload;
+//   const existingItem = state.items.find((i) => i.id === item.id);
+//   if (existingItem) {
+//     existingItem.amount += 1;
+//   } else {
+//     const newItem = {
+//       ...item,
+//       amount: 1,
+//       price: item.price, // Set the correct price value
+//     };
+//     state.items.push(newItem);
+//   }
+//   state.totalPrice += item.price;
+// },
+
+
 
 
 // import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
