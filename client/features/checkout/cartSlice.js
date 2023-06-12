@@ -1,23 +1,23 @@
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
-// import { Order } from "../../../server/db/models/Order";
+import { Order } from "../../../server/db/models/Order";
 
-// export const createOrder = createAsyncThunk(
-//   "cart/createOrder",
-//   async (_, { getState }) => {
-//     const { items, totalPrice } = getState().cart;
-//     // Use items and totalPrice to create the order data
-//     const orderData = {
-//       items: items,
-//       totalPrice: totalPrice,
-//       // other relevant fields
-//     };
+export const createOrder = createAsyncThunk(
+  "cart/createOrder",
+  async (_, { getState }) => {
+    const { items, totalPrice } = getState().cart;
+    // Use items and totalPrice to create the order data
+    const orderData = {
+      items: items,
+      totalPrice: totalPrice,
+      // other relevant fields
+    };
 
-//     // Call the Sequelize methods to create a new order entry in the database
-//     const createdOrder = await Order.create(orderData);
+    // Call the Sequelize methods to create a new order entry in the database
+    const createdOrder = await Order.create(orderData);
 
-//     return createdOrder;
-//   }
-// );
+    return createdOrder;
+  }
+);
 
 const cartSlice = createSlice({
   name: "cart",
@@ -52,10 +52,17 @@ const cartSlice = createSlice({
             }
             state.totalPrice -= existingItem.price;
           }
-        }
-      }
-    });
-
+        },
+        extraReducers: (builder) => {
+              builder.addCase(createOrder.fulfilled, (state, action) => {
+                // Handle the fulfilled state of createOrder action
+                // Reset the cart state or perform any necessary updates
+                state.items = [];
+                state.totalPrice = 0;
+              });
+                },
+              }
+            });
 
 export const { addToCart, removeFromCart } = cartSlice.actions;
 
