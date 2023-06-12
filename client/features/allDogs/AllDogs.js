@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllDogs} from "./allDogsSlice";
+import { fetchAllDogs } from "./allDogsSlice";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -36,9 +36,17 @@ const AllDogs = () => {
     <div>
       <h1>All Dogs</h1>
       {dogs.map((dog) => (
-        <Card key={dog.id} sx={{ maxWidth: 545 }} onClick={() => handleClickDogs(dog.id)}>
+        <Card
+          key={dog.id}
+          sx={{ maxWidth: 545 }}
+          onClick={() => handleClickDogs(dog.id)}
+        >
           {dog.imageUrl && (
-            <CardMedia sx={{ height: 140 }} image={dog.imageUrl} title={dog.name} />
+            <CardMedia
+              sx={{ height: 140 }}
+              image={dog.imageUrl}
+              title={dog.name}
+            />
           )}
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -67,11 +75,6 @@ const AllDogs = () => {
 };
 
 export default AllDogs;
-
-
-
-
-
 
 // const AllDogs = () => {
 //   //Pull in State

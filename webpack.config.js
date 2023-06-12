@@ -1,36 +1,36 @@
 module.exports = {
   externals: {
-    'pg-connection-string': 'commonjs pg-connection-string',
-    'pg-hstore': 'commonjs pg-hstore'
+    "pg-connection-string": "commonjs pg-connection-string",
+    "pg-hstore": "commonjs pg-hstore",
   },
   resolve: {
     fallback: {
-      fs: false
-    }
+      fs: false,
+    },
   },
   resolve: {
     alias: {
-      fs: 'browserify-fs'
-    }
+      fs: "browserify-fs",
+    },
   },
   resolve: {
     fallback: {
-      crypto: require.resolve('crypto-browserify'),
-      fs: false
-    }
+      crypto: require.resolve("crypto-browserify"),
+      fs: false,
+    },
   },
   resolve: {
     fallback: {
-      stream: require.resolve('stream-browserify')
-    }
+      stream: require.resolve("stream-browserify"),
+    },
   },
-  entry: ['./client/index.js'],
+  entry: ["./client/index.js"],
   output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js',
+    path: __dirname + "/public",
+    filename: "bundle.js",
   },
   context: __dirname,
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -40,16 +40,14 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
+          presets: ["@babel/preset-env", "@babel/preset-react"],
         },
       },
     ],
   },
 };
-
-
 
 // const webpack = require('webpack');
 // module.exports = function override(config) {

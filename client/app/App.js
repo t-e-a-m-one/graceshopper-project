@@ -1,12 +1,10 @@
-import React from 'react';
+import React from "react";
+import AppRoutes from "./AppRoutes";
 
-
-import Navbar from '../features/navbar/Navbar';
-import AppRoutes from './AppRoutes';
-
+import Navbar from "../features/navbar/Navbar";
+import SignUpForm from "../features/auth/SignUpForm";
 // import AllDogs from '../features/allDogs/AllDogs'
 // import SingleDog from '../features/singleDog/SingleDog'
-import SignUpForm from '../features/auth/SignUpForm'
 
 const App = () => {
   return (
@@ -17,7 +15,6 @@ const App = () => {
       {/* <AllDogs />
       <SingleDog /> */}
     </div>
-
   );
 };
 
