@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     dogs: dogsReducer,
-    singleDog: singleDogReducer,
+    singleDog: singleDogReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

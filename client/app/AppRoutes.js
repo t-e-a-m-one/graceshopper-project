@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
 import { me } from './store';
 import AllDogs from '../features/allDogs/AllDogs';
 import SingleDog from '../features/singleDog/SingleDog';
 import SignUpForm from '../features/auth/SignUpForm';
-
-/**
- * COMPONENT
- */
+import AdminPage from '../features/admin/AdminPage'; // Import the AdminPage component
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin); // Assuming you have a field for isAdmin in the user object
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,17 +23,14 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn ? (
         <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-           <Route
-        path="/dogs"
-        element={<AllDogs />}
-        />
-         <Route
-        path="/dogs/:id"
-        element={<SingleDog />}
-        />
-
+          {isAdmin ? (
+            <Route path="/*" element={<AdminPage />} /> // Render AdminPage if user is admin
+          ) : (
+            <Navigate to="/home" replace /> // Redirect to home page for non-admin users
+          )}
+          <Route path="/home" element={<Home />} />
+          <Route path="/dogs" element={<AllDogs />} />
+          <Route path="/dogs/:id" element={<SingleDog />} />
         </Routes>
       ) : (
         <Routes>
@@ -48,14 +44,12 @@ const AppRoutes = () => {
           />
           <Route
             path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
+            element={<SignUpForm />}
           />
-
         </Routes>
       )}
     </div>
   );
-
 };
 
 export default AppRoutes;
