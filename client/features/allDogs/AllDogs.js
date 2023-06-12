@@ -36,11 +36,10 @@ const AllDogs = () => {
   return (
     <div className="grid-container">
       {" "}
-      {/* Add the grid container class */}
       {dogs.map((dog) => (
         <Card
           key={dog.id}
-          className="card" // Add the card class
+          className="card"
           onClick={() => handleClickDogs(dog.id)}
         >
           {dog.imageUrl && (

@@ -19,3 +19,7 @@
 .nav-bar-right {
   display: flex;
 }
+
+#title1 {
+  margin-left: 20px;
+}

@@ -1,23 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import CartItem from "./CartItem";
-import { selectCartItems, addToCart, removeFromCart } from './cartSlice';
-
+import { selectCartItems, addToCart, removeFromCart } from "./cartSlice";
+import "./cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = [
     {
       id: 1,
-      name: 'Ike',
+      name: "Ike",
       sponsorFee: 57,
       amount: 3,
       price: 57, // Add the price property
-      imageUrl: 'https://picsum.photos/200/300',
-      gender: 'Female',
-      createdAt: '2023-06-12T05:55:06.131Z',
-      updatedAt: '2023-06-12T05:55:06.131Z',
+      imageUrl: "https://picsum.photos/200/300",
+      gender: "Female",
+      createdAt: "2023-06-12T05:55:06.131Z",
+      updatedAt: "2023-06-12T05:55:06.131Z",
     },
   ];
 
@@ -32,22 +32,21 @@ const Cart = () => {
   };
   console.log("cartItems from Cart.js:", cartItems);
 
-
   return (
-    <div>
+    <div id="tocart">
       <h2>Your Cart</h2>
-    {cartItems.length === 0 ? (
+      {cartItems.length === 0 ? (
         <p>No items in cart.</p>
-    ) : (
-      cartItems.map((item) => (
-        <CartItem
-          key={item.id}
-          item={item}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-        />
-      ))
-    )}
+      ) : (
+        cartItems.map((item) => (
+          <CartItem
+            key={item.id}
+            item={item}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        ))
+      )}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
     </div>
   );
