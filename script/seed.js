@@ -35,6 +35,19 @@ async function seed() {
 
     // Create users
     const users = [];
+
+    const user = await User.create({
+      username: 'admin',
+      password: '123',
+      lastName:'admin',
+      firstName: 'admin',
+      address:'123 Admin',
+      email: 'admin@admin.com',
+      isAdmin: true
+    })
+
+    users.push(user)
+
     for (let i = 0; i < 20; i++) {
       // Generate user data
       const username = faker.internet.userName();
@@ -44,6 +57,7 @@ async function seed() {
       const address = faker.address.streetAddress();
       const email = faker.internet.email();
 
+
       const user = await User.create({
         username,
         password,
@@ -51,6 +65,7 @@ async function seed() {
         firstName,
         address,
         email,
+        isAdmin: false
       });
 
       users.push(user);
