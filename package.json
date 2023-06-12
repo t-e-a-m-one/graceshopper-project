@@ -24,12 +24,15 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.4",
     "bcrypt": "^5.1.0",
+    "browserify-fs": "^1.0.0",
     "compression": "^1.7.4",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.0"
   },
   "devDependencies": {

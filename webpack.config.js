@@ -1,4 +1,29 @@
 module.exports = {
+  externals: {
+    'pg-connection-string': 'commonjs pg-connection-string',
+    'pg-hstore': 'commonjs pg-hstore'
+  },
+  resolve: {
+    fallback: {
+      fs: false
+    }
+  },
+  resolve: {
+    alias: {
+      fs: 'browserify-fs'
+    }
+  },
+  resolve: {
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      fs: false
+    }
+  },
+  resolve: {
+    fallback: {
+      stream: require.resolve('stream-browserify')
+    }
+  },
   entry: ['./client/index.js'],
   output: {
     path: __dirname + '/public',
