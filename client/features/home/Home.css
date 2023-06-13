@@ -1,0 +1,38 @@
+#welcome {
+  font-size: 35px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#mustlogin {
+  font-size: 20px;
+  color: #dc882d;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+#introduction {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #555;
+  text-align: center;
+}
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+body {
+  background-image: url("Paws.png");
+  background-size: 600px;
+  background-repeat: repeat;
+  background-position: center top 40px;
+}

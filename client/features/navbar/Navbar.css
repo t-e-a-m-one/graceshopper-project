@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   background-image: url("FetchLogo.png");
+  background-color: white;
   background-repeat: no-repeat;
   background-position: center left; /* Updated: Changed "top left" to "center left" */
   background-size: 150px;
