@@ -33,7 +33,7 @@ const Navbar = () => {
               </div>
               <div className="nav-bar-right">
                 <Link to="/home">Home</Link>
-                <Link to={`/users/${myId}`}>Account</Link>
+                <Link to={`/signup`}>Sign Up</Link>
                 <Link to={`/cart`}>Cart</Link>
                 <button
                   className="logout"
