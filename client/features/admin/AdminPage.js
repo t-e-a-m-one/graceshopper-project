@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllDogs, deleteDog, updateDog } from "../allDogs/allDogsSlice";
+import './AdminPage.css'; // Import CSS file for styling
 
 const AdminPage = () => {
   const dogs = useSelector((state) => state.dogs.allDogs);
@@ -29,17 +30,20 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <div className="admin-page">
       <h1>Admin Page</h1>
       <h2>Dogs</h2>
-      {dogs.map((dog) => (
-        <div key={dog.id}>
-          <p>{dog.name}</p>
-          <p>{dog.sponsorFee}</p>
-          <button onClick={() => handleDeleteDog(dog.id)}>Delete</button>
-          <button onClick={() => handleUpdateDog(dog)}>Update</button>
-        </div>
-      ))}
+      <div className="dog-grid">
+        {dogs.map((dog) => (
+          <div key={dog.id} className="dog-card">
+            <img src={dog.imageUrl} alt={dog.name} />
+            <p><strong>Name:</strong> {dog.name}</p>
+            <p><strong>Sponsor Fee:$</strong> {dog.sponsorFee}</p>
+            <button onClick={() => handleDeleteDog(dog.id)}>Delete</button>
+            <button onClick={() => handleUpdateDog(dog)}>Update</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
