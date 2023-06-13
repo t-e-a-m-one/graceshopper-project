@@ -16,7 +16,7 @@ const App = () => {
       <Navbar />
       <AppRoutes />
       <SignUpForm />
-
+      <Checkout />
       {/* <AllDogs />
       <SingleDog /> */}
     </div>

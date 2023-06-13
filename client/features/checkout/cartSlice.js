@@ -1,5 +1,15 @@
-import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
+
+export const fetchCartItems = createAsyncThunk("cart/fetchCartItems", async (userId) => {
+  try {
+    const { data } = await axios.get(`/api/cart/${userId}`);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
 
 export const createOrder = createAsyncThunk("cart/createOrder", async (orderData) => {
   const response = await axios.post("/api/orders", orderData);
@@ -9,19 +19,84 @@ export const createOrder = createAsyncThunk("cart/createOrder", async (orderData
 });
 
 
+// export const addToCart = createAsyncThunk(
+//   "cart/addToCart",
+//   async (item) => {
+//       const response = await axios.post("/api/cart", item);
+//       return response.data;
+
+//   }
+// );
+export const addToCart = createAsyncThunk(
+  "cart/addToCart",
+  async (item) => {
+    const { name, sponsorFee,  userId, dogId,  cartItems } = item;
+    // sponsorFee, gender, imageUrl,email, address, firstName, lastName, password, isAdmin,userName,
+    const payload = {
+      name,
+      sponsorFee,
+      // gender,
+      // imageUrl,
+      userId,
+      dogId,
+      user: {
+        // userName,
+        // email,
+        // address,
+        // firstName,
+        // lastName,
+        // password,
+        // isAdmin,
+        cartItems,
+      },
+    };
+
+    dispatch(addToCart(item));
+
+
+    const response = await axios.post("/api/cart", payload);
+    return response.data;
+  }
+);
+
+
+
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (itemId) => {
+
+      await axios.delete(`/api/removeFromCart/${itemId}`);
+    return itemId;
+  }
+);
+export const updateQuantity = createAsyncThunk(
+  "cart/updateQuantity",
+  async ({ itemId, quantity }) => {
+    const response = await axios.put(`/api/cart/${itemId}`, { quantity });
+    return response.data;
+  }
+);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: [],
     totalPrice: 0,
   },
-  reducers: {
-    addToCart: (state, action) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(createOrder.fulfilled, (state, action) => {
+      state.items = [];
+      state.totalPrice = 0;
+    });
+    builder.addCase(fetchCartItems.fulfilled, (state, action) => {
+      state.items = action.payload;
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
       const item = action.payload;
       const existingItem = state.items.find(
         (i) => i.id === item.id && i.sponsorFee === item.sponsorFee
       );
-
       if (existingItem) {
         existingItem.amount += 1;
       } else {
@@ -33,8 +108,8 @@ const cartSlice = createSlice({
         state.items.push(newItem);
       }
       state.totalPrice += item.price;
-    },
-    removeFromCart: (state, action) => {
+    });
+    builder.addCase(removeFromCart.fulfilled, (state, action) => {
       const itemId = action.payload;
       const existingItem = state.items.find((i) => i.id === itemId);
       if (existingItem) {
@@ -45,25 +120,78 @@ const cartSlice = createSlice({
         }
         state.totalPrice -= existingItem.price;
       }
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(createOrder.fulfilled, (state, action) => {
-      state.items = [];
-      state.totalPrice = 0;
-      // Perform any additional state updates after order creation
+    });
+    builder.addCase(updateQuantity.fulfilled, (state, action) => {
+      const { itemId, quantity } = action.payload;
+      const existingItem = state.items.find((i) => i.id === itemId);
+      if (existingItem) {
+        existingItem.amount = quantity;
+        state.totalPrice += (quantity - existingItem.amount) * existingItem.price;
+      }
     });
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
-
-export const selectCartItems = createSelector(
-  (state) => state.cart,
-  (cart) => cart
-);
+export const selectCartItems = (state) => state.cart.items;
+export const selectTotalPrice = (state) => state.cart.totalPrice;
 
 export default cartSlice.reducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const{
+//   createOrder,
+//   addToCart,
+//   removeFromCart,
+//   fetchCartItems,
+//   selectCartItems,
+// } = cartSlice.actions
+
+
+// addToCart: (state, action) => {
+    //   const item = action.payload;
+    //   const existingItem = state.items.find(
+    //     (i) => i.id === item.id && i.sponsorFee === item.sponsorFee
+    //   );
+
+    //   if (existingItem) {
+    //     existingItem.amount += 1;
+    //   } else {
+    //     const newItem = {
+    //       ...item,
+    //       amount: 1,
+    //       price: item.price,
+    //     };
+    //     state.items.push(newItem);
+    //   }
+    //   state.totalPrice += item.price;
+    // },
+    // removeFromCart: (state, action) => {
+    //   const itemId = action.payload;
+    //   const existingItem = state.items.find((i) => i.id === itemId);
+    //   if (existingItem) {
+    //     if (existingItem.amount === 1) {
+    //       state.items = state.items.filter((i) => i.id !== itemId);
+    //     } else {
+    //       existingItem.amount -= 1;
+    //     }
+    //     state.totalPrice -= existingItem.price;
+    //   }
+    // },
+
 
 
 

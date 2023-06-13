@@ -1,7 +1,8 @@
 'use strict';
 
-const { db, models: { User, Order, Cart } } = require('../server/db');
+const { db, models: { User, Order} } = require('../server/db');
 const Dog = require('../server/db/models/Dog');
+const Cart = require('../server/db/models/Cart');
 const faker = require('faker');
 
 async function seed() {
@@ -75,7 +76,7 @@ async function seed() {
   // Create orders
   const orders = [];
   let newOrder; // Declare newOrder outside the loop
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     newOrder = await Order.create({
       isCart: true,
       transactionID: 'xyz123',
@@ -85,7 +86,7 @@ async function seed() {
     orders.push(newOrder);
   }
 
-  // Update an order (example)
+  // Update an order
   if (orders.length > 0) {
     const orderId = orders[0].id; // Use the ID of the first order
     const orderToUpdate = await Order.findByPk(orderId);

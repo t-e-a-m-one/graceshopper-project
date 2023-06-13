@@ -8,30 +8,24 @@ const Order = require('./models/Order')
 const Cart = require('./models/Cart')
 
 //associations could go here!
-
-//Added this line below
-
-// User.belongsTo(Dog, { foreignKey: 'dogId', as: 'dog' });
-// Dog.hasMany(User);
-
-Order.belongsTo(User); // An order belongs to a user
-Order.belongsToMany(Dog, { through: 'Order' }); // An order can have multiple dogs
-
-// In your User model file:
 User.hasMany(Order); // A user can have multiple orders
 
-// In your Dog model file:
-Dog.belongsToMany(Order, { through: 'Order' }); // A dog can be in multiple orders
+Order.belongsTo(User); // An order belongs to a user
+Order.belongsToMany(Dog, { through: 'Cart', as: 'orderDogs' }); // An order can have multiple dogs
+Order.hasOne(Cart, { foreignKey: 'orderId' });
+
+Dog.belongsToMany(Order, { through: 'Cart', as: 'dogOrders' }); // A dog can be in multiple orders through the cart
 
 Cart.belongsTo(User, { foreignKey: 'userId' });
 Cart.belongsTo(Dog, { foreignKey: 'dogId' });
+Cart.belongsTo(Order, { foreignKey: 'orderId' });
 
 module.exports = {
   db,
   Dog,
+  Cart,
   models: {
     User,
     Order,
-    Cart
   },
 }

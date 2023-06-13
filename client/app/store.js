@@ -20,3 +20,4 @@ console.log(store.getState());
 export default store;
 export * from '../features/auth/authSlice';
 export * from '../features/allDogs/allDogsSlice';
+export * from '../features/checkout/cartSlice'
