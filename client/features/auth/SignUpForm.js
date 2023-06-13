@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate } from '../../app/store';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../../app/store";
 
 const SignUpForm = () => {
   const { error } = useSelector((state) => state.auth);
@@ -16,7 +16,17 @@ const SignUpForm = () => {
     const lastName = formData.get("lastName");
     const address = formData.get("address");
     console.log(formData);
-    dispatch(authenticate({ username, password, email, firstName, lastName, address, method: 'signup' }));
+    dispatch(
+      authenticate({
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+        address,
+        method: "signup",
+      })
+    );
   };
 
   return (
@@ -66,6 +76,5 @@ const SignUpForm = () => {
     </div>
   );
 };
-
 
 export default SignUpForm;

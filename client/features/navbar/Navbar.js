@@ -9,10 +9,12 @@ const Navbar = () => {
   const myId = useSelector((state) => state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate("/login");
   };
+
   const username = useSelector((state) => state.auth.me.username);
 
   return (
@@ -21,20 +23,18 @@ const Navbar = () => {
         {isLoggedIn ? (
           <>
             <div className="header">
-              <h1 className="title">Fetch</h1>
               <h3 className="user" id="title1">
-                Welcome, {username}!
+                Hello, {username}!
               </h3>
             </div>
             <div className="nav-bar">
-              <div className="nav-bar-left">
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">Home</Link>
-                <Link to={`/users/${myId}`}>Account</Link>
-                <Link to={`/users/${myId}/cartitems`}>Cart</Link>
+              <div className="statement">
+                <h1 id="pethome">Where every pet can find a home.</h1>
               </div>
               <div className="nav-bar-right">
-                <Link to={`/users/`}>All Users</Link>
+                <Link to="/home">Home</Link>
+                <Link to={`/users/${myId}`}>Account</Link>
+                <Link to={`/cart`}>Cart</Link>
                 <button
                   className="logout"
                   type="button"
@@ -47,20 +47,15 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <div className="header">
-              <h1 className="title">Fetch</h1>
-            </div>
+            <div className="header"></div>
 
             <div className="nav-bar">
-              <div className="nav-bar-left">
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">Home</Link>
-                {/* <Link to={`/users/${myId}`}>Account</Link> */}
-                <Link to={`/users/cartitems`}>Cart</Link>
+              <div className="statement">
+                <h1 id="pethome">Where every pet can find a home.</h1>
               </div>
               <div className="nav-bar-right">
-                {/* <Link to={`/users/`}>All Users</Link> */}
-
+                <Link to="/home">Home</Link>
+                <Link to={`/users/cartitems`}>Cart</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>
               </div>

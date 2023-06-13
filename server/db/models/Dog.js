@@ -1,8 +1,7 @@
-const {Sequelize}  = require('sequelize')
-const db = require ('../db')
+const { Sequelize } = require("sequelize");
+const db = require("../db");
 
-
-const Dog = db.define('dog', {
+const Dog = db.define("dog", {
   // id: {
   //   type: Sequelize.INTEGER,
   //   primaryKey: true,
@@ -12,52 +11,18 @@ const Dog = db.define('dog', {
   //   }
   // },
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   sponsorFee: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
   },
   gender: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue:'https://picsum.photos/200/300'
-  }
+    defaultValue: "https://placedog.net/640/480?random",
+  },
 });
 
 module.exports = Dog;
-
-
-
-// const { Sequelize, DataTypes, Model } = require('sequelize');
-// const db = require('../db');
-
-// class Dog extends Model {}
-
-// Dog.init(
-//   {
-//     name: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     sponsorFee: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//     },
-//     gender: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     imageURL: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   },
-//   {
-//     sequelize: db,
-//     modelName: 'dog',
-//   }
-// );
-
-// module.exports = Dog;

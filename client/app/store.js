@@ -3,6 +3,7 @@ import logger from 'redux-logger';
 import authReducer from '../features/auth/authSlice';
 import dogsReducer from '../features/allDogs/allDogsSlice'
 import singleDogReducer from '../features/singleDog/singleDogSlice'
+import cartSliceReducer from '../features/checkout/cartSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,8 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
+
+console.log(store.getState());
 
 export default store;
 export * from '../features/auth/authSlice';
