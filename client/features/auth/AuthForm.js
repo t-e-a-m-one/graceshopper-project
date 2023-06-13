@@ -1,16 +1,19 @@
-import React from "react";
+// export default AuthForm;
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticate } from "../../app/store";
-
-/**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ name, displayName, isSignUp }) => {
-  const { error } = useSelector((state) => state.auth);
+  const { error, me } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (me.id) {
+      navigate("/home"); // Navigate to "/home" when the user is logged in
+    }
+  }, [me, navigate]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
