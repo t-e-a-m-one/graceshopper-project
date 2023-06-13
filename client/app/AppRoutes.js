@@ -1,3 +1,4 @@
+// routes.js
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -16,16 +17,12 @@ import {
   selectCartItems,
 } from "../features/checkout/cartSlice";
 
-/**
- * COMPONENT
- */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
-  const navigate = useNavigate(); // Add useNavigate hook to access navigation function
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(me());
@@ -33,17 +30,17 @@ const AppRoutes = () => {
 
   useEffect(() => {
     if (isAdmin && isLoggedIn) {
-      navigate("/admin"); // Navigate to "/admin" if user is an admin and is logged in
+      navigate("/admin");
     }
   }, [isAdmin, isLoggedIn, navigate]);
 
   return (
     <div>
       <Routes>
+        <Route path="/" element={<Home />} />
         {isLoggedIn ? (
           <>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<AllDogs />} />
             <Route path="/dogs" element={<AllDogs />} />
             <Route path="/dogs/:id" element={<SingleDog />} />
             <Route
@@ -57,10 +54,6 @@ const AppRoutes = () => {
           </>
         ) : (
           <>
-            <Route
-              path="/"
-              element={<AuthForm name="login" displayName="Login" />}
-            />
             <Route
               path="/login"
               element={<AuthForm name="login" displayName="Login" />}

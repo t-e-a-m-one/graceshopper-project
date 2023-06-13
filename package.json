@@ -1,7 +1,7 @@
 {
   "name": "dog-app",
   "version": "2.0.0",
-  "description": "Hopefully, a pet app!",
+  "description": "A pet fee sponsorship app",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

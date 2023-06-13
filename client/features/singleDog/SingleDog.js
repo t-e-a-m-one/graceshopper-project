@@ -45,7 +45,7 @@ const SingleDog = () => {
           {dog.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Sponsor Fee: {dog.sponsorFee}
+          Sponsor Fee: ${dog.sponsorFee}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Gender: {dog.gender}

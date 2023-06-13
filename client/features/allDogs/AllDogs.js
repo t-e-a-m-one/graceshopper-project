@@ -54,7 +54,7 @@ const AllDogs = () => {
               {dog.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Sponsor Fee: {dog.sponsorFee}
+              Sponsor Fee: ${dog.sponsorFee}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Gender: {dog.gender}
@@ -66,9 +66,9 @@ const AllDogs = () => {
             <Button size="small" onClick={() => handleAddToCart(dog)}>
               Add to Cart
             </Button>
-            <Button size="small">Favorite</Button>
+            <Button size="small">View Details</Button>
           </CardActions>
-          <Link to={`/dogs/${dog.id}`}>View Details</Link>
+          {/* <Link to={`/dogs/${dog.id}`}>View Details</Link> */}
         </Card>
       ))}
     </div>
