@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 
 const CartItem = (props) => {
-  const [quantity, setQuantity] = useState(props.item.amount); // Initialize the quantity state with the initial item amount
-
+  const { cartItems } = props
+  const [quantity, setQuantity] = useState(props.item); // Initialize the quantity state with the initial item amount
+ console.log("At CartItem:", cartItems )
 
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10); // Parse the input value to an integer
@@ -37,28 +38,30 @@ const CartItem = (props) => {
       </label>
 
       {/* Add to Cart button */}
-      <button onClick={() => props.addToCart(props.item)}>Add to Cart</button>
+      <button onClick={() => addToCart(props.item)}>Add to Cart</button>
 
       {/* Remove from Cart button */}
       <button onClick={() => props.removeFromCart(props.item.id)}>
         Remove from Cart
       </button>
+      <Link to={`/cart/${userId}`}>Go to Cart</Link>
+
     </div>
   );
 };
 
-CartItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string,
-    sponsorFee: PropTypes.number,
-    amount: PropTypes.number.isRequired,
-    imageUrl: PropTypes.string,
-  }).isRequired,
-  addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired,
-  updateQuantity: PropTypes.func.isRequired,
-};
+// CartItem.propTypes = {
+//   item: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string,
+//     sponsorFee: PropTypes.number,
+//     amount: PropTypes.number.isRequired,
+//     imageUrl: PropTypes.string,
+//   }).isRequired,
+//   addToCart: PropTypes.func.isRequired,
+//   removeFromCart: PropTypes.func.isRequired,
+//   updateQuantity: PropTypes.func.isRequired,
+// };
 
 
 export default CartItem;

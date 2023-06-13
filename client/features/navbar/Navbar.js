@@ -31,7 +31,7 @@ const Navbar = () => {
                 {/* The navbar will show these links after you log in */}
                 <Link to="/home">Home</Link>
                 <Link to="/dogs">Dogs</Link>
-                <Link to={`/users/${myId}/cart`}>Cart</Link>
+                <Link to={`/cart/${myId}`}>Cart</Link>
               </div>
               <div className="nav-bar-right">
                 <Link to={`/users/${myId}`}>Account</Link>

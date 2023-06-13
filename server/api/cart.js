@@ -1,19 +1,20 @@
+
 const { Cart, Dog } = require('../db/index');
 const { models: { User, Order }} = require('../db');
 const express = require('express');
 const router = express.Router();
 
-// Retrieves all cart items for a specific user from the database.
-router.get('/:id', async (req, res, next) => {
+//Retrieves all cart items for a specific user from the database.
+router.get('/:userId', async (req, res, next) => {
   try {
-    const { userId } = req.query;
+    const userId  = req.params.userId;
     if (!userId) {
       // If userId is undefined or missing, return an appropriate error response
-      return res.status(400).json({ error: 'userId is required' });
+      return res.status(400).json({ error: 'userId is required'});
     }
     const cartItems = await Cart.findAll({
       where: { userId },
-      include: [{ model: User }, { model: Dog },{ model: Order }],
+      include: [ { model: Dog }],
     });
     res.json(cartItems);
   } catch (error) {
@@ -43,7 +44,6 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
-
 // Creates a new order in the database
 router.post('/new-order', async (req, res, next) => {
   try {
@@ -98,7 +98,6 @@ router.delete('/:itemId', async (req, res, next) => {
 });
 
 module.exports = router;
-
 
 
 

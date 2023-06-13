@@ -9,45 +9,109 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const { userId } = useParams();
+ console.log("cartItem", cartItems)
 
   useEffect(() => {
     dispatch(fetchCartItems(userId));
   }, [dispatch, userId]);
 
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-  };
+  // const handleAddToCart = (item) => {
+  //   dispatch(addToCart(item));
+  // };
 
-  const handleRemoveFromCart = (itemId) => {
-    dispatch(removeFromCart(itemId));
-  };
+  // const handleRemoveFromCart = (itemId) => {
+  //   dispatch(removeFromCart(itemId));
+  // };
 
-  const handleUpdateQuantity = (itemId, quantity) => {
-    dispatch(updateQuantity(itemId, quantity));
-  };
+  // const handleUpdateQuantity = (itemId, quantity) => {
+  //   dispatch(updateQuantity(itemId, quantity));
+  // };
 
   return (
     <div>
       <h2>Your Cart</h2>
-      {/* <Cart /> */}
       {cartItems && cartItems.length === 0 ? (
-        <p>No items in cart.</p>
+// cartItems.map((item) => {
+  <CartItem
+    // key={item.id}
+    cartItems={cartItems}
+    // addToCart={handleAddToCart}
+    // removeFromCart={handleRemoveFromCart}
+    // updateQuantity={handleUpdateQuantity}
+  />
+// })
+
       ) : (
-        cartItems.map((item) => (
-          <CartItem
-            key={item.id}
-            item={item}
-            addToCart={handleAddToCart}
-            removeFromCart={handleRemoveFromCart}
-            updateQuantity={handleUpdateQuantity}
-          />
-        ))
+ <p>No items in cart.</p>
+
+
+
+
       )}
       <h2>Total: ${totalPrice.toFixed(2)}</h2>
     </div>
   );
 };
 export default Cart;
+
+
+
+
+
+
+
+// import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import CartItem from "./CartItem";
+// import { addToCart, removeFromCart, fetchCartItems, updateQuantity } from './cartSlice';
+// import { useParams } from 'react-router-dom';
+
+
+// const Cart = () => {
+//   const dispatch = useDispatch();
+//   const cartItems = useSelector((state) => state.cart.items);
+//   const totalPrice = useSelector((state) => state.cart.totalPrice);
+//   const { userId } = useParams();
+
+//   useEffect(() => {
+//     dispatch(fetchCartItems(userId));
+//   }, [dispatch, userId]);
+//   console.log("HEre in cart:", userId)
+
+//   const handleAddToCart = (item) => {
+//     dispatch(addToCart(item));
+//   };
+
+//   const handleRemoveFromCart = (itemId) => {
+//     dispatch(removeFromCart(itemId));
+//   };
+
+//   const handleUpdateQuantity = (itemId, quantity) => {
+//     dispatch(updateQuantity(itemId, quantity));
+//   };
+
+//   return (
+//     <div>
+//       <h2>Your Cart</h2>
+
+//       {cartItems && cartItems.length === 0 ? (
+//          cartItems.map((item) => (
+//           <CartItem
+//             key={item.id}
+//             item={item}
+//             addToCart={handleAddToCart}
+//             removeFromCart={handleRemoveFromCart}
+//             updateQuantity={handleUpdateQuantity}
+//           />
+//         ))
+//       ) : (
+//  <p>No items in cart.</p>
+//       )}
+//       <h2>Total: ${totalPrice.toFixed(2)}</h2>
+//     </div>
+//   );
+// };
+// export default Cart;
 
 
 
