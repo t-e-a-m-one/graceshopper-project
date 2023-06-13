@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import  {fetchAllDogs, deleteDog, updateDog}  from "../allDogs/allDogsSlice";
+import { fetchAllDogs, deleteDog, updateDog } from "../allDogs/allDogsSlice";
 
 const AdminPage = () => {
   const dogs = useSelector((state) => state.dogs.allDogs);
@@ -11,12 +11,21 @@ const AdminPage = () => {
   }, [dispatch]);
 
   const handleDeleteDog = (id) => {
-    dispatch(deleteDog(id));
+    if (window.confirm("Are you sure you want to delete this dog?")) {
+      dispatch(deleteDog(id));
+    }
   };
 
   const handleUpdateDog = (dog) => {
-    const updatedDog = { ...dog, name: "Updated Name" };
-    dispatch(updateDog(updatedDog));
+    // Prompt the user for the updated name and sponsor fee
+    const updatedName = prompt("Enter the updated name:");
+    const updatedSponsorFee = prompt("Enter the updated sponsor fee:");
+
+    // Proceed with updating the dog if the input values are valid
+    if (updatedName && updatedSponsorFee) {
+      const updatedDog = { ...dog, name: updatedName, sponsorFee: updatedSponsorFee };
+      dispatch(updateDog(updatedDog));
+    }
   };
 
   return (

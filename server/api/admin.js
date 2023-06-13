@@ -5,7 +5,7 @@ const { Dog, User } = require('../db/index');
 // Middleware function to check if user is an admin
 const isAdmin = (req, res, next) => {
   const user = req.user; // Assuming you have set up user authentication middleware to attach the user object to the request
-  if (user.username === 'admin') { 
+  if (user.username === 'admin') {
     next(); // Proceed to admin routes
   } else {
     res.status(401).json({ error: 'Unauthorized' });
