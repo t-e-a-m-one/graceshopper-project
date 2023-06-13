@@ -29,9 +29,9 @@ const CartItem = (props) => {
       <button onClick={() => handleAddToCart(props.item)}>Add to Cart</button> */}
 
       {/* Remove from Cart button */}
-      <button onClick={() => dispatch(removeFromCart(props.item.id))}>
+      {/* <button onClick={() => dispatch(removeFromCart(props.item.id))}>
         Remove from Cart
-      </button>
+      </button> */}
     </div>
   );
 };

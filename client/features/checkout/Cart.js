@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import CartItem from "./CartItem";
 import { selectCartItems, addToCart, removeFromCart } from "./cartSlice";
+import { Link } from "react-router-dom";
 import "./cart.css";
 
 const Cart = () => {
@@ -48,6 +49,9 @@ const Cart = () => {
         ))
       )}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
+      <Link to="/cart/checkout">
+        <button>Go to Checkout</button>
+      </Link>
     </div>
   );
 };
