@@ -23,13 +23,13 @@ async function seed() {
     const name = faker.name.firstName();
     const sponsorFee = faker.datatype.number({ min: 10, max: 100 });
     const gender = faker.random.arrayElement(["Male", "Female"]);
-    const imageURL = faker.image.imageUrl("cats"); // Generate random image URL
+    const imageUrl = `https://placedog.net/640/480?random=${i + 1}`; // Generate random image URL
 
     const dog = await Dog.create({
       name,
       sponsorFee,
       gender,
-      imageURL, // Add imageURL property
+      imageUrl: imageUrl, // Add imageURL property
     });
 
     dogs.push(dog);
