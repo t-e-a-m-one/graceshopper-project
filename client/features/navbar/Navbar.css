@@ -1,3 +1,25 @@
-/* * {
-  background-color: blueviolet;
-} */
+.nav-bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-image: url("FetchLogo.png");
+  background-repeat: no-repeat;
+  background-position: center left; /* Updated: Changed "top left" to "center left" */
+  background-size: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 130px;
+}
+#pethome {
+  display: flex;
+  margin-left: 150px;
+  color: #dc882d;
+}
+.nav-bar-right {
+  display: flex;
+}
+
+#title1 {
+  margin-left: 20px;
+}

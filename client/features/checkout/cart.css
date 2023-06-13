@@ -1,0 +1,20 @@
+#tocart {
+  background-color: #dc882d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#tocart img {
+  width: 200px; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+}
+
+#tocart p {
+  margin: 10px 0;
+}
+
+img {
+  border-radius: 8px;
+}

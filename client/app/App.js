@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
+import AppRoutes from "./AppRoutes";
 
-
-import Navbar from '../features/navbar/Navbar';
-import AppRoutes from './AppRoutes';
-
-import AllDogs from '../features/allDogs/AllDogs'
-import SingleDog from '../features/singleDog/SingleDog'
-import SignUpForm from '../features/auth/SignUpForm'
+import Navbar from "../features/navbar/Navbar";
+import SignUpForm from "../features/auth/SignUpForm";
+import Checkout from "../features/checkout/Checkout";
+// import AllDogs from '../features/allDogs/AllDogs'
+// import SingleDog from '../features/singleDog/SingleDog'
 
 const App = () => {
   return (
@@ -14,10 +13,10 @@ const App = () => {
       <Navbar />
       <AppRoutes />
       <SignUpForm />
-      <AllDogs />
-      <SingleDog />
+      <Checkout />
+      {/* <AllDogs />
+      <SingleDog /> */}
     </div>
-
   );
 };
 

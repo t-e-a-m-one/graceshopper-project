@@ -1,11 +1,38 @@
+const webpack = require("webpack");
+
 module.exports = {
-  entry: ['./client/index.js'],
+  externals: {
+    "pg-connection-string": "commonjs pg-connection-string",
+    "pg-hstore": "commonjs pg-hstore",
+  },
+  resolve: {
+    fallback: {
+      fs: false,
+    },
+  },
+  resolve: {
+    alias: {
+      fs: "browserify-fs",
+    },
+  },
+  resolve: {
+    fallback: {
+      crypto: require.resolve("crypto-browserify"),
+      fs: false,
+    },
+  },
+  resolve: {
+    fallback: {
+      stream: require.resolve("stream-browserify"),
+    },
+  },
+  entry: ["./client/index.js"],
   output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js',
+    path: __dirname + "/public",
+    filename: "bundle.js",
   },
   context: __dirname,
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -15,11 +42,21 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
+          presets: ["@babel/preset-env", "@babel/preset-react"],
         },
+      },
+      {
+        test: /\.png$/,
+        use: "file-loader",
       },
     ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+      Buffer: ["buffer", "Buffer"],
+    }),
+  ],
 };
