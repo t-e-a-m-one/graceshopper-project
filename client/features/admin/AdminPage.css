@@ -1,15 +1,7 @@
-.admin-page {
-  /* Add any additional styles for the admin page container */
-}
-
 .dog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as desired */
   gap: 20px; /* Adjust the gap between grid items */
-}
-
-.dog-card {
-  /* Add any additional styles for the dog card */
 }
 
 .dog-card img {

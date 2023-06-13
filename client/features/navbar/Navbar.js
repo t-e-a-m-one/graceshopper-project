@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/home");
   };
 
   const username = useSelector((state) => state.auth.me.username);
