@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllDogs, deleteDog, updateDog } from "../allDogs/allDogsSlice";
-import './AdminPage.css'; // Import CSS file for styling
+import "./AdminPage.css"; // Import CSS file for styling
 
 const AdminPage = () => {
   const dogs = useSelector((state) => state.dogs.allDogs);
@@ -18,13 +18,15 @@ const AdminPage = () => {
   };
 
   const handleUpdateDog = (dog) => {
-    // Prompt the user for the updated name and sponsor fee
     const updatedName = prompt("Enter the updated name:");
     const updatedSponsorFee = prompt("Enter the updated sponsor fee:");
 
-    // Proceed with updating the dog if the input values are valid
     if (updatedName && updatedSponsorFee) {
-      const updatedDog = { ...dog, name: updatedName, sponsorFee: updatedSponsorFee };
+      const updatedDog = {
+        ...dog,
+        name: updatedName,
+        sponsorFee: updatedSponsorFee,
+      };
       dispatch(updateDog(updatedDog));
     }
   };
@@ -37,8 +39,12 @@ const AdminPage = () => {
         {dogs.map((dog) => (
           <div key={dog.id} className="dog-card">
             <img src={dog.imageUrl} alt={dog.name} />
-            <p><strong>Name:</strong> {dog.name}</p>
-            <p><strong>Sponsor Fee:$</strong> {dog.sponsorFee}</p>
+            <p>
+              <strong>Name:</strong> {dog.name}
+            </p>
+            <p>
+              <strong>Sponsor Fee:$</strong> {dog.sponsorFee}
+            </p>
             <button onClick={() => handleDeleteDog(dog.id)}>Delete</button>
             <button onClick={() => handleUpdateDog(dog)}>Update</button>
           </div>

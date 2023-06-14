@@ -9,12 +9,6 @@ const AuthForm = ({ name, displayName, isSignUp }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (me.id) {
-  //     navigate("/home"); // Navigate to "/home" when the user is logged in
-  //   }
-  // }, [me, navigate]);
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;

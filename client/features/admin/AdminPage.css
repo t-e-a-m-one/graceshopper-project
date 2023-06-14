@@ -1,7 +1,7 @@
 .dog-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as desired */
-  gap: 20px; /* Adjust the gap between grid items */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .dog-card img {

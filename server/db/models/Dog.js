@@ -2,14 +2,6 @@ const { Sequelize } = require("sequelize");
 const db = require("../db");
 
 const Dog = db.define("dog", {
-  // id: {
-  //   type: Sequelize.INTEGER,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   validate: {
-  //     notEmpty: true
-  //   }
-  // },
   name: {
     type: Sequelize.STRING,
   },
