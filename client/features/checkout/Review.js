@@ -7,7 +7,6 @@ import Grid from "@mui/material/Grid";
 
 const products = [];
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
 const payments = [
   { name: "Card type", detail: "Visa" },
   { name: "Card holder", detail: "Mr Michael Dudu" },
@@ -37,14 +36,7 @@ export default function Review() {
         </ListItem>
       </List>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Shipping
-          </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(", ")}</Typography>
-        </Grid>
-        <Grid item container direction="column" xs={12} sm={6}>
+        <Grid item container direction="column" xs={12}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>

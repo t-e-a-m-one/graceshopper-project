@@ -49,7 +49,7 @@ const AppRoutes = () => {
                 <Cart addToCart={addToCart} removeFromCart={removeFromCart} />
               }
             />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/cart/checkout" element={<Checkout />} />
             {isAdmin && <Route path="/admin" element={<AdminPage />} />}
           </>
         ) : (
