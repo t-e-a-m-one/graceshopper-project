@@ -29,7 +29,11 @@ function Copyright() {
   );
 }
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = [
+  "Free Gift with Purchase",
+  "Payment details",
+  "Review your order",
+];
 
 function getStepContent(step) {
   switch (step) {
