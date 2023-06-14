@@ -8,19 +8,7 @@ import "./cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = [
-    {
-      id: 1,
-      name: "Ike",
-      sponsorFee: 57,
-      amount: 3,
-      price: 57, // Add the price property
-      imageUrl: "https://picsum.photos/200/300",
-      gender: "Female",
-      createdAt: "2023-06-12T05:55:06.131Z",
-      updatedAt: "2023-06-12T05:55:06.131Z",
-    },
-  ];
+  const cartItems = [];
 
   const calculateTotal = (items) =>
     items.reduce((acc, item) => acc + (item.amount * item.price || 0), 0);

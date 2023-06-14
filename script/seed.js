@@ -35,67 +35,52 @@ async function seed() {
     dogs.push(dog);
   }
 
-    // Create users
-    const users = [];
-
-    const user = await User.create({
-      username: 'admin',
-      password: '123',
-      lastName:'admin',
-      firstName: 'admin',
-      address:'123 Admin',
-      email: 'admin@admin.com',
-      isAdmin: true
-    })
-
-    users.push(user)
-
-    for (let i = 0; i < 20; i++) {
-      // Generate user data
-      const username = faker.internet.userName();
-      const password = '123';
-      const lastName = faker.name.lastName();
-      const firstName = faker.name.firstName();
-      const address = faker.address.streetAddress();
-      const email = faker.internet.email();
-
-
-      const user = await User.create({
-        username,
-        password,
-        lastName,
-        firstName,
-        address,
-        email,
-        isAdmin: false
-      });
-
-    users.push(user);
-  }
-  // Create orders
+  // Create users
+  const users = [];
   const orders = [];
-  let newOrder; // Declare newOrder outside the loop
-  for (let i = 0; i < 10; i++) {
-    newOrder = await Order.create({
+
+  const user = await User.create({
+    username: "admin",
+    password: "123",
+    lastName: "admin",
+    firstName: "admin",
+    address: "123 Admin",
+    email: "admin@admin.com",
+    isAdmin: true,
+  });
+
+  users.push(user);
+
+  for (let i = 0; i < 20; i++) {
+    // Generate user data
+    const username = faker.internet.userName();
+    const password = "123";
+    const lastName = faker.name.lastName();
+    const firstName = faker.name.firstName();
+    const address = faker.address.streetAddress();
+    const email = faker.internet.email();
+
+    const newUser = await User.create({
+      username,
+      password,
+      lastName,
+      firstName,
+      address,
+      email,
+      isAdmin: false,
+    });
+
+    users.push(newUser);
+
+    // Create an empty cart (order) for each user
+    const order = await Order.create({
       isCart: true,
-      transactionID: "xyz123",
-      cartItems: [
-        { item: "item1", quantity: 2 },
-        { item: "item2", quantity: 1 },
-      ],
       checkout: false,
     });
-    orders.push(newOrder);
-  }
 
-  // Update an order (example)
-  if (orders.length > 0) {
-    const orderId = orders[0].id; // Use the ID of the first order
-    const orderToUpdate = await Order.findByPk(orderId);
-    if (orderToUpdate) {
-      orderToUpdate.checkout = true;
-      await orderToUpdate.save();
-    }
+    orders.push(order);
+
+    newUser.setOrder(order);
   }
 
   console.log(`seeded ${users.length} users`);
