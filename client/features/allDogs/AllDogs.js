@@ -63,9 +63,9 @@ const AllDogs = () => {
           <CardActions>
             {/* <Button size="small">Share</Button>
             <Button size="small">Learn More</Button> */}
-            <Button size="small" onClick={() => handleAddToCart(dog)}>
+            {/* <Button size="small" onClick={() => handleAddToCart(dog)}>
               Add to Cart
-            </Button>
+            </Button> */}
             <Button size="small">View Details</Button>
           </CardActions>
           {/* <Link to={`/dogs/${dog.id}`}>View Details</Link> */}

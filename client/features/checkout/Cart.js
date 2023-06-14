@@ -1,25 +1,32 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import CartItem from "./CartItem";
-import { selectCartItems, addToCart, removeFromCart } from "./cartSlice";
+import { addToCart, removeFromCart, selectCartItems } from "./cartSlice";
 import { Link } from "react-router-dom";
+import { createOrder } from "./cartSlice";
 import "./cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = [];
+  const cartItems = useSelector(selectCartItems);
 
   const calculateTotal = (items) =>
-    items.reduce((acc, item) => acc + (item.amount * item.price || 0), 0);
+    items.reduce((acc, item) => acc + (item.amount * item.sponsorFee || 0), 0);
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
   };
+
   const handleRemoveFromCart = (item) => {
     dispatch(removeFromCart(item.id));
   };
-  console.log("cartItems from Cart.js:", cartItems);
+
+  const handleCheckout = () => {
+    cartItems.forEach((item) => {
+      dispatch(createOrder({ item }));
+    });
+  };
 
   return (
     <div id="tocart">
@@ -38,7 +45,7 @@ const Cart = () => {
       )}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
       <Link to="/cart/checkout">
-        <button>Go to Checkout</button>
+        <button onClick={handleCheckout}>Go to Checkout</button>
       </Link>
     </div>
   );

@@ -25,13 +25,13 @@ const CartItem = (props) => {
       <p>Price: ${props.item.price || 0}</p>
       <p>Quantity: {props.item.amount}</p>
 
-      {/* Add to Cart button
-      <button onClick={() => handleAddToCart(props.item)}>Add to Cart</button> */}
+      {/* Add to Cart button */}
+      <button onClick={() => handleAddToCart(props.item)}>Add to Cart</button>
 
       {/* Remove from Cart button */}
-      {/* <button onClick={() => dispatch(removeFromCart(props.item.id))}>
+      <button onClick={() => dispatch(removeFromCart(props.item.id))}>
         Remove from Cart
-      </button> */}
+      </button>
     </div>
   );
 };

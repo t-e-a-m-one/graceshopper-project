@@ -1,34 +1,36 @@
-import axios from 'axios';
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-
+import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //Get single dog
-export const getSingleDog = createAsyncThunk ("singleDog/getSingleDog", async (id) => {
-  try {
-    const {data} = await axios.get(`/api/dogs/${id}`);
-    console.log("RESPONSE", data);
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
+export const getSingleDog = createAsyncThunk(
+  "singleDog/getSingleDog",
+  async (id) => {
+    try {
+      const { data } = await axios.get(`/api/dogs/${id}`);
+      console.log("RESPONSE", data);
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-});
-
+);
 
 //This is the slice
-export const SingleDogSlice = createSlice ({
+export const SingleDogSlice = createSlice({
   name: "singleDog",
   initialState: {
-  dog : null,
-  status: "idle",
-  error: null,
-},
+    dog: null,
+    status: "idle",
+    error: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getSingleDog.pending,(state) => {
+    builder
+      .addCase(getSingleDog.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getSingleDog.fulfilled, (state,action) => {
-        state.status = "succeded";
+      .addCase(getSingleDog.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.dog = action.payload;
       })
       .addCase(getSingleDog.rejected, (state, action) => {
@@ -40,17 +42,8 @@ export const SingleDogSlice = createSlice ({
 
 export default SingleDogSlice.reducer;
 
-
-
-
-
-
-
-
-
 // import axios from 'axios';
 // import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-
 
 // const initialState = {
 //   dog : {},
@@ -68,7 +61,6 @@ export default SingleDogSlice.reducer;
 //     throw new Error(error.message);
 //   }
 // });
-
 
 // //This is the slice
 // export const SingleDogSlice = createSlice ({
